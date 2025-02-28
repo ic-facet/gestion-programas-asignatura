@@ -19,7 +19,9 @@ RUN apt-get update && apt-get install -y weasyprint && \
     apt purge -y --auto-remove && \
     rm -rf /var/lib/apt/lists/*
 
+
 # Final image so Stage
 FROM production AS final
 EXPOSE 8000
-ENTRYPOINT ["sh", "./entrypoint.sh"]
+RUN chmod +x app/entrypoint.sh
+ENTRYPOINT ["sh", "app/entrypoint.sh"]
