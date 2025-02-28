@@ -14,14 +14,11 @@ WORKDIR /app
 COPY . ./
 COPY --from=build /app/build/ ./build/
 RUN apt-get update && apt-get install -y weasyprint && \
-    pip install -r requirements.txt && \    
-    python manage.py collectstatic && \
+    pip install -r requirements.txt && \  
+    python manage.py collectstatic --noinput && \
     apt purge -y --auto-remove && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    chmod +x entrypoint.sh
 
-
-# Final image so Stage
-FROM production AS final
 EXPOSE 8000
-RUN chmod +x /app/entrypoint.sh
-ENTRYPOINT ["sh", "/app/entrypoint.sh"]
+CMD ["/app/entrypoint.sh"]
