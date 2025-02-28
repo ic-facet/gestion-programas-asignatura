@@ -23,5 +23,5 @@ RUN apt-get update && apt-get install -y weasyprint && \
 # Final image so Stage
 FROM production AS final
 EXPOSE 8000
-RUN chmod +x app/entrypoint.sh
-ENTRYPOINT ["sh", "app/entrypoint.sh"]
+RUN chmod +x /app/entrypoint.sh
+ENTRYPOINT ["sh", "/app/entrypoint.sh"]
