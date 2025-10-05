@@ -42,6 +42,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*"])
 # Application definition
 
 INSTALLED_APPS = [
+    "jazzmin",
     "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -198,3 +199,94 @@ CUSTOM_AUTH_COOKIE_SECURE = True
 CUSTOM_AUTH_COOKIE_HTTP_ONLY = True
 CUSTOM_AUTH_COOKIE_SAMESITE = "Strict"
 CORS_ALLOW_METHODS = ["GET", "POST"]
+
+# Jazzmin Configuration
+JAZZMIN_SETTINGS = {
+    "site_title": "Gestión de Programas",
+    "site_header": "Gestión de Programas de Asignatura",
+    "site_brand": "Gestión de Programas",
+    "welcome_sign": "Bienvenido al Panel de Administración",
+    "copyright": "Gestión de Programas de Asignatura",
+
+    # Logo
+    "site_logo": None,
+    "login_logo": None,
+    "site_icon": None,
+
+    # Colores del proyecto
+    "show_ui_builder": False,
+
+    # Top Menu
+    "topmenu_links": [
+        {"name": "Inicio", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Ver Sitio", "url": "/", "new_window": True},
+    ],
+
+    # User Menu
+    "usermenu_links": [
+        {"model": "auth.user"}
+    ],
+
+    # Icons
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "backend.Usuario": "fas fa-user-circle",
+        "backend.Carrera": "fas fa-graduation-cap",
+        "backend.Asignatura": "fas fa-book",
+        "backend.ProgramaDeAsignatura": "fas fa-file-alt",
+        "backend.PlanDeEstudio": "fas fa-clipboard-list",
+    },
+
+    # UI Tweaks
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+    "order_with_respect_to": [],
+
+    # Custom CSS/JS
+    "custom_css": None,
+    "custom_js": None,
+
+    # Related Modal
+    "related_modal_active": False,
+
+    # Change view
+    "changeform_format": "horizontal_tabs",
+    "changeform_format_overrides": {},
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-primary",
+    "accent": "accent-primary",
+    "navbar": "navbar-white navbar-light",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "default",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    },
+    "actions_sticky_top": False
+}
