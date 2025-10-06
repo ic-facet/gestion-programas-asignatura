@@ -31,7 +31,7 @@ from backend.views import (
     NuevoProgramaAPI,
     InformacionEditarProgramaAPartirDelUltimoAPI,
     ObtenerProgramasHistorial,
-    # GenerarPDF,  # Temporalmente comentado - requiere GTK
+    GenerarPDF,
     GoogleLoginApi,
     GoogleAuthApi,
     GenerarMatriz,
@@ -50,7 +50,7 @@ informes_patterns = [
 programas_patterns = [
     path("pendientes/", ListarProgramasPendientesAPI.as_view()),
     path("vigentes/", ListarProgramasVigentesAPI.as_view()),
-    # path("pdf/<id_programa>/", GenerarPDF.as_view()),  # Temporalmente comentado
+    path("pdf/<id_programa>/", GenerarPDF.as_view()),
     path("editar/<id_programa>/", ModificarProgramaAPI.as_view()),
     path("nuevo/<id_asignatura>/", NuevoProgramaAPI.as_view()),
     path("aprobar/<id_programa>/", AprobarVersionProgramaAPI.as_view()),

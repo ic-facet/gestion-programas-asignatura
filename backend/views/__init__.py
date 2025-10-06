@@ -13,8 +13,7 @@ from .programas_de_asignatura import (
     PedirCambiosVersionProgramaAPI,
     AprobarVersionProgramaAPI,
 )
-# Temporalmente comentado - requiere GTK en Windows
-# from .programas_de_asignatura.pdf.generar_pdf import GenerarPDF
+from .programas_de_asignatura.pdf.generar_pdf import GenerarPDF
 from .plan import APIListarPlanesDeEstudio
 from .informacion_para_formularios import (
     AsignaturasDisponiblesAPartirPrograma,
