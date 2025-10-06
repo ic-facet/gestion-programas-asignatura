@@ -9,6 +9,8 @@ class TipoDescriptor(TextChoices):
 class Semestres(TextChoices):
     PRIMER = ("PS", "Primer Semestre")
     SEGUNDO = ("SS", "Segundo Semestre")
+    ANUAL = ("AN", "Anual")
+    INDISTINTO = ("IN", "Indistinto")
 
 
 class MetodologiaAsignatura(TextChoices):
