@@ -21,9 +21,10 @@ Para poder correr las funcionalidades del sistema, es necesario correr el backen
 1. Crear entorno virtual de python, con versión de Python `3.11.4`.
 2. Activar el entorno virtual.
 3. Instalar dependencias con `pip install -r requirements.txt`
-4. Correr las migraciones con `python manage.py migrate`
-5. Crear instancias de prueba con el comando `python manage.py setup`
-6. Correr el servidor con `python manage.py runserver`
+4. **[Solo Windows]** Instalar GTK para generación de PDFs (ver sección abajo)
+5. Correr las migraciones con `python manage.py migrate`
+6. Crear instancias de prueba con el comando `python manage.py setup`
+7. Correr el servidor con `python manage.py runserver`
 
 Se puede visitar el Administrador de Django se debe:
 1. Crear un superusuario con `python manage.py createsuperuser`, y seguir los pasos indicados en la terminal.
@@ -39,7 +40,32 @@ El comando de `setup` crea las siguientes instancias:
 - 9 Descriptores y 9 ejes reservados. Cada carrera tiene 2 descriptores y ejes reservados que le pertenecen y 3 de cada uno compartido entre todos
 - 12 asignaturas. 3 asignaturas son únicas para cada carrera, y 3 asignaturas compartidas. 4 serán híbridas, 4 presenciales y 4 virtuales 
 
+## Configuración adicional para Windows (Desarrollo Local)
+
+### Instalación de GTK para generación de PDFs
+WeasyPrint requiere GTK en Windows para generar PDFs. Sigue estos pasos:
+
+1. Descarga GTK Runtime: https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases
+2. Ejecuta el instalador y sigue las instrucciones
+3. Reinicia tu terminal/IDE después de la instalación
+4. Verifica que funcione ejecutando el servidor de Django
+
+**Nota:** En servidores Linux (producción), GTK se instala automáticamente con las dependencias del sistema.
+
+### Alternativa: Desarrollo sin PDFs
+Si no necesitas generar PDFs durante el desarrollo:
+1. Comenta la importación en `backend/views/__init__.py`:
+   ```python
+   # from .programas_de_asignatura.pdf.generar_pdf import GenerarPDF
+   ```
+2. Comenta las líneas relacionadas en `backend/urls.py`
+
+### Redis (Opcional para desarrollo local)
+Redis es necesario para tareas asíncronas (Celery). Para desarrollo local sin Redis:
+- El proyecto funcionará sin tareas asíncronas
+- Para instalar Redis en Windows: https://github.com/microsoftarchive/redis/releases
+
 ## Cómo asignar un Rol a un usuario?
-1. Ingresar a el panel de Administración. 
+1. Ingresar a el panel de Administración.
 2. Ingresar al modelo Usuarios.
 3. Elegir el usuario que se quiere asignar un rol, y elegir el tipo de rol, y la opción extra requerida para el usuario. Un Director de Carrera debe seleccionar una carrera. Un titular de cátedra o docente debe seleccionar una asignatura. El Secretario académico no debe elegir ni carrera ni asignatura. 
