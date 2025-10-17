@@ -108,8 +108,8 @@ DATABASES = {
 
 
 if ENVIRONMENT == "production" or POSTGRESS_LOCALLY == True:
-    DATABASE_URL_PRODUCTION = env.str("DATABASE_URL_PRODUCTION", "")
-    DATABASES["default"] = dj_database_url.parse(DATABASE_URL_PRODUCTION)
+    DJANGO_DATABASE_URL = env.str("DJANGO_DATABASE_URL", "")
+    DATABASES["default"] = dj_database_url.parse(DJANGO_DATABASE_URL)
 
 
 # Password validation
