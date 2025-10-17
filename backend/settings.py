@@ -20,7 +20,7 @@ import dj_database_url
 # Inicializar las variables de entorno
 env = environ.Env()
 environ.Env.read_env()
-BASE_URL = env.str("BASE_URL", "")
+BASE_URL = env.str("DJANGO_BASE_URL", env.str("BASE_URL", ""))
 ENVIRONMENT = env.str("ENVIRONMENT", "development")
 POSTGRESS_LOCALLY = env.bool("POSTGRESS_LOCALLY", False)
 
@@ -32,12 +32,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str("SECRET_KEY", "")
+SECRET_KEY = env.str("DJANGO_SECRET_KEY", env.str("SECRET_KEY", ""))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", False)
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*"])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", env.list("ALLOWED_HOSTS", default=["*"]))
 
 
 # Application definition
@@ -108,8 +108,8 @@ DATABASES = {
 
 
 if ENVIRONMENT == "production" or POSTGRESS_LOCALLY == True:
-    DJANGO_DATABASE_URL = env.str("DJANGO_DATABASE_URL", "")
-    DATABASES["default"] = dj_database_url.parse(DJANGO_DATABASE_URL)
+    DATABASE_URL_PRODUCTION = env.str("DJANGO_DATABASE_URL", env.str("DATABASE_URL_PRODUCTION", ""))
+    DATABASES["default"] = dj_database_url.parse(DATABASE_URL_PRODUCTION)
 
 
 # Password validation
