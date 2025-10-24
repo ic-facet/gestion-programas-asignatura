@@ -7,8 +7,14 @@ from backend.common.choices import Roles
 
 
 class AdminEstandar(admin.ModelAdmin):
-    list_display = ["nombre", "fecha_inicio", "carrera"]
+    list_display = ["nombre", "fecha_inicio", "carrera", "esta_activo"]
+    list_display_links = ["nombre"]
+    search_fields = ["nombre", "carrera__nombre"]
+    list_filter = ["carrera", "fecha_inicio"]
     filter_horizontal = ["descriptores"]
+    ordering = ["-fecha_inicio", "nombre"]
+    list_per_page = 50
+    autocomplete_fields = ["carrera"]
 
     def has_permission(self, request):
         user = request.user
