@@ -13,7 +13,7 @@ from .programas_de_asignatura import (
     PedirCambiosVersionProgramaAPI,
     AprobarVersionProgramaAPI,
 )
-# from .programas_de_asignatura.pdf.generar_pdf import GenerarPDF  # Comentado para desarrollo local sin GTK
+from .programas_de_asignatura.pdf.generar_pdf import GenerarPDF
 from .plan import APIListarPlanesDeEstudio
 from .informacion_para_formularios import (
     AsignaturasDisponiblesAPartirPrograma,
