@@ -7,7 +7,7 @@ from backend.common.choices import Roles
 
 
 class AdminEstandar(admin.ModelAdmin):
-    list_display = ["nombre", "fecha_inicio", "carrera", "esta_activo"]
+    list_display = ["nombre", "fecha_inicio", "carrera"]
     list_display_links = ["nombre"]
     search_fields = ["nombre", "carrera__nombre"]
     list_filter = ["carrera", "fecha_inicio"]
