@@ -8,6 +8,13 @@ from backend.forms import FormSemestre
 
 class AdminSemestre(admin.ModelAdmin):
     form = FormSemestre
+    list_display = ["semestre", "anio_academico", "fecha_inicio", "fecha_fin"]
+    list_display_links = ["semestre"]
+    search_fields = ["semestre", "anio_academico__fecha_inicio"]
+    list_filter = ["semestre", "anio_academico", "fecha_inicio"]
+    ordering = ["-fecha_inicio"]
+    list_per_page = 50
+    autocomplete_fields = ["anio_academico"]
 
     def has_permission(self, request):
         user = request.user

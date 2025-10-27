@@ -20,18 +20,24 @@ class CorrelativaInline(admin.TabularInline):
 
 
 class AdminVersionProgramaAsignatura(admin.ModelAdmin):
-    list_display = ["asignatura", "semestre", "estado"]
+    list_display = ["asignatura", "semestre", "estado", "creada", "modificada"]
+    list_display_links = ["asignatura"]
+    search_fields = ["asignatura__codigo", "asignatura__denominacion", "semestre__anio_academico__fecha_inicio"]
+    list_filter = ["estado", "semestre", "asignatura"]
+    ordering = ["-creada"]
+    list_per_page = 50
+    autocomplete_fields = ["asignatura", "semestre"]
+    readonly_fields = ["creada", "modificada"]
     inlines = [
         DescriptorInline,
         ActividadReservadaInline,
         CorrelativaInline,
     ]
-    list_filter = [ "estado", "semestre", "asignatura"]
 
     fieldsets = [
         (
             None,
-            {"fields": ["asignatura", "semestre", "estado"]},
+            {"fields": ["asignatura", "semestre", "estado", "creada", "modificada"]},
         ),
         (
             "Informacion del Cursado",

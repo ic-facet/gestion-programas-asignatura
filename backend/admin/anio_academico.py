@@ -8,6 +8,11 @@ from backend.forms import FormAnioAcademico
 
 class AdminAnioAcademico(admin.ModelAdmin):
     form = FormAnioAcademico
+    list_display = ["fecha_inicio", "fecha_fin"]
+    list_display_links = ["fecha_inicio"]
+    search_fields = ["fecha_inicio", "fecha_fin"]
+    ordering = ["-fecha_inicio"]
+    list_per_page = 50
 
     def has_permission(self, request):
         user = request.user

@@ -8,6 +8,10 @@ from backend.common.choices import Roles
 
 class AdminCarrera(admin.ModelAdmin):
     list_display = ["nombre"]
+    list_display_links = ["nombre"]
+    search_fields = ["nombre"]
+    ordering = ["nombre"]
+    list_per_page = 50
 
     def has_permission(self, request):
         user = request.user

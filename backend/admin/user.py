@@ -42,8 +42,12 @@ class UserAdmin(admin.UserAdmin):
     form = ChangeUserForm
     change_password_form = ChangePasswordForm
 
-    list_display = ["first_name", "last_name", "email"]
+    list_display = ["email", "first_name", "last_name", "is_staff", "is_superuser", "is_active"]
+    list_display_links = ["email"]
+    search_fields = ["email", "first_name", "last_name"]
+    list_filter = ["is_staff", "is_superuser", "is_active"]
     ordering = ["email"]
+    list_per_page = 50
     inlines = [RolInline]
 
     def get_fieldsets(
