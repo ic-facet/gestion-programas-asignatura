@@ -1,10 +1,17 @@
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  root: '.', // La raíz del proyecto
   build: {
-    outDir: 'build'
+    outDir: 'build',
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html')
+      }
+    }
   },
   plugins: [reactRefresh()],
   define: {
@@ -22,7 +29,15 @@ export default defineConfig({
     }
   },
   server: {
-    host: "localhost",
+    host: "127.0.0.1",
     port: 5173,
-  },
+    fs: {
+      // Evitar escanear directorios fuera del proyecto
+      strict: true
+    },
+    watch: {
+      // Ignorar estos directorios en el watch
+      ignored: ['**/backend/**', '**/venv/**', '**/__pycache__/**', '**/*.pyc']
+    }
+  }
 });

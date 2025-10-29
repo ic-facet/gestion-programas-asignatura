@@ -11,11 +11,34 @@ Es necesario crear un superusuario, y para eso se debe ingresar al container del
 # SI NO SE USA DOCKER SEGUIR LAS SIGUIENTES INSTRUCCIONES
 ## Setup de frontend
 1. Instalar dependencias con `npm install`
-2. Setear variables de entorno en el archivo `.env`
+2. Setear variables de entorno en el archivo `.env` (ver sección de Variables de Entorno abajo)
 3. Correr servidor con `npm run dev`
 4. Se puede visitar la pagina en `http://127.0.0.1:5173`
 
-Para poder correr las funcionalidades del sistema, es necesario correr el backend. 
+Para poder correr las funcionalidades del sistema, es necesario correr el backend.
+
+### Login de Desarrollo (Solo Local)
+
+Para desarrollo local, puedes usar el **Login de Desarrollo** sin necesidad de configurar OAuth de Google:
+
+1. Asegúrate de tener estas variables en tu `.env`:
+   ```
+   VITE_DEV_MODE=true
+   VITE_ENABLE_MSW=true
+   ```
+
+2. Inicia el frontend con `npm run dev`
+
+3. En la página de login verás un botón naranja "🔧 Login de Desarrollo (Solo Local)"
+
+4. Haz clic en ese botón para entrar automáticamente como usuario de desarrollo con todos los permisos
+
+**Nota:** Este botón solo aparece cuando `VITE_DEV_MODE=true` y está diseñado exclusivamente para desarrollo local. En producción, siempre se usará autenticación de Google.
+
+El usuario de desarrollo tiene:
+- Email: `dev@facet.unt.edu.ar`
+- Nombre: Usuario Desarrollo
+- Todos los roles: Administrador, Director, Docente y Secretario Académico 
 
 ## Setup del backend
 1. **Primero navega a la carpeta del proyecto** (si no estás en ella):

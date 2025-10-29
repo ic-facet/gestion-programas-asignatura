@@ -1,2 +1,2 @@
 export { ProtectedRoute } from './ProtectedRoute'
-export default ProtectedRoute
+export { ProtectedRoute as default } from './ProtectedRoute'

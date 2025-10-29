@@ -1,11 +1,19 @@
 import React, { useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Login.css'
 import img from '../../img'
 import { RUTAS_PAGINAS } from '../../constants/constants'
+import { DEV_MODE } from '../../helpers/env-variables'
+import { useAuth } from '../../hooks/useAuth'
+import { client } from '../../utils/axiosClient'
+
 const BASE_FRONTEND_URL = import.meta.env.VITE_BASE_FRONTEND_URL
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_OAUTH2_CLIENT_ID
 
 const Login: React.FC = () => {
+  const navigate = useNavigate()
+  const { getAuthUser } = useAuth()
+
   const openGoogleLoginPage = useCallback(() => {
     const googleAuthUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
 
@@ -27,6 +35,16 @@ const Login: React.FC = () => {
 
     window.location.href = url
   }, [])
+
+  const handleDevLogin = useCallback(async () => {
+    try {
+      await client.post('auth/dev-login/')
+      await getAuthUser()
+      navigate(RUTAS_PAGINAS.INICIO)
+    } catch (error) {
+      console.error('Error en login de desarrollo:', error)
+    }
+  }, [navigate, getAuthUser])
 
   return (
     <div className="container">
@@ -53,6 +71,24 @@ const Login: React.FC = () => {
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" />
           <p>Iniciar sesion con Google</p>
         </button>
+
+        {DEV_MODE && (
+          <>
+            <div style={{ margin: '10px 0', color: '#666', fontSize: '14px' }}>
+              - o -
+            </div>
+            <button
+              onClick={handleDevLogin}
+              className="login-button"
+              style={{
+                backgroundColor: '#ff9800',
+                border: '2px solid #f57c00'
+              }}
+            >
+              <p>🔧 Login de Desarrollo (Solo Local)</p>
+            </button>
+          </>
+        )}
       </div>
     </div>
   )
