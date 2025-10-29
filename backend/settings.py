@@ -17,15 +17,15 @@ import environ
 from datetime import timedelta
 import dj_database_url
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 # Inicializar las variables de entorno
 env = environ.Env()
-environ.Env.read_env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 BASE_URL = env.str("DJANGO_BASE_URL", default=env.str("BASE_URL", default=""))
 ENVIRONMENT = env.str("ENVIRONMENT", "development")
 POSTGRESS_LOCALLY = env.bool("POSTGRESS_LOCALLY", False)
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
