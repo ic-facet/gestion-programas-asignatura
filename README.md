@@ -45,6 +45,9 @@ Para poder correr las funcionalidades del sistema, es necesario correr el backen
    Una vez activado, deberías ver `(venv)` al inicio de la línea de comandos.
 
 4. Instalar dependencias con `pip install -r requirements.txt`
+
+   **Nota:** Si obtienes errores de compilación con algún paquete en Windows (como `screen`), verifica que ese paquete esté comentado en `requirements.txt`. Los paquetes que no se usan en el proyecto ya están comentados.
+
 5. **[Solo Windows]** Instalar GTK para generación de PDFs (ver sección abajo)
 6. Correr las migraciones con `python manage.py migrate`
 7. Crear instancias de prueba con el comando `python manage.py setup`
