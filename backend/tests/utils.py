@@ -331,14 +331,14 @@ DATOS_DEFAULT_ASIGNATURA = {
     "bloque_curricular": "",
     "carga_rtf": 2,
     "semanas_dictado": 16,
-    "semanal_teoria_presencial": 1,
-    "semanal_practica_presencial": 1,
-    "semanal_teorico_practico_presencial": 1,
-    "semanal_lab_presencial": 1,
-    "semanal_teoria_remoto": 0,
-    "semanal_practica_remoto": 0,
-    "semanal_teorico_practico_remoto": 0,
-    "semanal_lab_remoto": 0,
+    "total_teoria_presencial": 1,
+    "total_practica_presencial": 1,
+    "total_teorico_practico_presencial": 1,
+    "total_lab_presencial": 1,
+    "total_teoria_remoto": 0,
+    "total_practica_remoto": 0,
+    "total_teorico_practico_remoto": 0,
+    "total_lab_remoto": 0,
 }
 
 VALORES_INVALIDOS = [None, ""]

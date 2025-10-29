@@ -33,16 +33,16 @@ class Asignatura(models.Model):
 
     # Horarios
     semanas_dictado = models.PositiveIntegerField()
-    semanal_teoria_presencial = models.PositiveIntegerField(blank=True, null=True)
-    semanal_practica_presencial = models.PositiveIntegerField(blank=True, null=True)
-    semanal_teorico_practico_presencial = models.PositiveIntegerField(
+    total_teoria_presencial = models.PositiveIntegerField(blank=True, null=True)
+    total_practica_presencial = models.PositiveIntegerField(blank=True, null=True)
+    total_teorico_practico_presencial = models.PositiveIntegerField(
         blank=True, null=True
     )
-    semanal_lab_presencial = models.PositiveIntegerField(blank=True, null=True)
-    semanal_teoria_remoto = models.PositiveIntegerField(blank=True, null=True)
-    semanal_practica_remoto = models.PositiveIntegerField(blank=True, null=True)
-    semanal_teorico_practico_remoto = models.PositiveIntegerField(blank=True, null=True)
-    semanal_lab_remoto = models.PositiveIntegerField(blank=True, null=True)
+    total_lab_presencial = models.PositiveIntegerField(blank=True, null=True)
+    total_teoria_remoto = models.PositiveIntegerField(blank=True, null=True)
+    total_practica_remoto = models.PositiveIntegerField(blank=True, null=True)
+    total_teorico_practico_remoto = models.PositiveIntegerField(blank=True, null=True)
+    total_lab_remoto = models.PositiveIntegerField(blank=True, null=True)
     horas_evaluacion = models.PositiveIntegerField(blank=True, null=True)
     carga_rtf = models.PositiveIntegerField()
 
@@ -57,20 +57,20 @@ class Asignatura(models.Model):
     objects = ManagerAsignatura()
 
     @property
-    def horas_semanales_clases(self) -> int:
+    def horas_totales_clases(self) -> int:
         """
-        Horas totales semanales
+        Horas totales de clases
         """
 
         campos = [
-            "semanal_teoria_presencial",
-            "semanal_practica_presencial",
-            "semanal_teorico_practico_presencial",
-            "semanal_lab_presencial",
-            "semanal_teoria_remoto",
-            "semanal_practica_remoto",
-            "semanal_teorico_practico_remoto",
-            "semanal_lab_remoto",
+            "total_teoria_presencial",
+            "total_practica_presencial",
+            "total_teorico_practico_presencial",
+            "total_lab_presencial",
+            "total_teoria_remoto",
+            "total_practica_remoto",
+            "total_teorico_practico_remoto",
+            "total_lab_remoto",
         ]
 
         return sum(
@@ -81,9 +81,9 @@ class Asignatura(models.Model):
     @property
     def carga_total(self) -> int:
         """
-        Horas totales, contando la cantidad de semanas
+        Carga horaria total de clases
         """
-        return self.horas_semanales_clases * self.semanas_dictado
+        return self.horas_totales_clases
 
     def __str__(self):
         return f"{self.codigo} - {self.denominacion}"
@@ -95,17 +95,17 @@ class Asignatura(models.Model):
             errores["codigo"] = CODIGO_ASIGNATURA_INCORRECTO
 
         campos_presencial = [
-            "semanal_teoria_presencial",
-            "semanal_practica_presencial",
-            "semanal_teorico_practico_presencial",
-            "semanal_lab_presencial",
+            "total_teoria_presencial",
+            "total_practica_presencial",
+            "total_teorico_practico_presencial",
+            "total_lab_presencial",
         ]
 
         campos_remoto = [
-            "semanal_teoria_remoto",
-            "semanal_practica_remoto",
-            "semanal_teorico_practico_remoto",
-            "semanal_lab_remoto",
+            "total_teoria_remoto",
+            "total_practica_remoto",
+            "total_teorico_practico_remoto",
+            "total_lab_remoto",
         ]
 
         if self.metodologia == MetodologiaAsignatura.PRESENCIAL:

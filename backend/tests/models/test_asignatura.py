@@ -18,7 +18,7 @@ class TestAsignatura(TestCase):
             nombre="Bloque Curricular Prueba", coeficiente=1
         )
 
-    def test_horas_semanales_clases(self):
+    def test_horas_totales_clases(self):
         carga_teoria = 4
         carga_practica = 2
         carga_teorico_practico = 2
@@ -34,14 +34,14 @@ class TestAsignatura(TestCase):
             metodologia=MetodologiaAsignatura.PRESENCIAL,
             bloque_curricular=self.bloque_curricular,
             semanas_dictado=16,
-            semanal_teoria_presencial=carga_teoria,
-            semanal_practica_presencial=carga_practica,
-            semanal_teorico_practico_presencial=carga_teorico_practico,
-            semanal_lab_presencial=carga_lab,
+            total_teoria_presencial=carga_teoria,
+            total_practica_presencial=carga_practica,
+            total_teorico_practico_presencial=carga_teorico_practico,
+            total_lab_presencial=carga_lab,
             carga_rtf=10,
         )
 
-        self.assertEqual(asignatura.horas_semanales_clases, carga_esperada)
+        self.assertEqual(asignatura.horas_totales_clases, carga_esperada)
 
         # Pruebo para metodologia virtual
         asignatura = Asignatura.objects.create(
@@ -50,14 +50,14 @@ class TestAsignatura(TestCase):
             metodologia=MetodologiaAsignatura.VIRTUAL,
             bloque_curricular=self.bloque_curricular,
             semanas_dictado=16,
-            semanal_teoria_remoto=carga_teoria,
-            semanal_practica_remoto=carga_practica,
-            semanal_teorico_practico_remoto=carga_teorico_practico,
-            semanal_lab_remoto=carga_lab,
+            total_teoria_remoto=carga_teoria,
+            total_practica_remoto=carga_practica,
+            total_teorico_practico_remoto=carga_teorico_practico,
+            total_lab_remoto=carga_lab,
             carga_rtf=10,
         )
 
-        self.assertEqual(asignatura.horas_semanales_clases, carga_esperada)
+        self.assertEqual(asignatura.horas_totales_clases, carga_esperada)
 
         # Pruebo para metodologia hibrida
         asignatura = Asignatura.objects.create(
@@ -66,18 +66,18 @@ class TestAsignatura(TestCase):
             metodologia=MetodologiaAsignatura.HIBRIDO,
             bloque_curricular=self.bloque_curricular,
             semanas_dictado=16,
-            semanal_teoria_remoto=carga_teoria,
-            semanal_practica_remoto=carga_practica,
-            semanal_teorico_practico_remoto=carga_teorico_practico,
-            semanal_lab_remoto=carga_lab,
-            semanal_teoria_presencial=carga_teoria,
-            semanal_practica_presencial=carga_practica,
-            semanal_teorico_practico_presencial=carga_teorico_practico,
-            semanal_lab_presencial=carga_lab,
+            total_teoria_remoto=carga_teoria,
+            total_practica_remoto=carga_practica,
+            total_teorico_practico_remoto=carga_teorico_practico,
+            total_lab_remoto=carga_lab,
+            total_teoria_presencial=carga_teoria,
+            total_practica_presencial=carga_practica,
+            total_teorico_practico_presencial=carga_teorico_practico,
+            total_lab_presencial=carga_lab,
             carga_rtf=10,
         )
 
-        self.assertEqual(asignatura.horas_semanales_clases, carga_esperada * 2)
+        self.assertEqual(asignatura.horas_totales_clases, carga_esperada * 2)
 
     def test_carga_total(self):
         carga_teoria = 4
@@ -87,7 +87,7 @@ class TestAsignatura(TestCase):
         semanas_dictado = 16
         carga_esperada = (
             carga_teoria + carga_practica + carga_teorico_practico + carga_lab
-        ) * semanas_dictado
+        )
 
         asignatura = Asignatura.objects.create(
             denominacion="Asignatura Prueba",
@@ -95,10 +95,10 @@ class TestAsignatura(TestCase):
             metodologia=MetodologiaAsignatura.PRESENCIAL,
             bloque_curricular=self.bloque_curricular,
             semanas_dictado=semanas_dictado,
-            semanal_teoria_presencial=carga_teoria,
-            semanal_practica_presencial=carga_practica,
-            semanal_teorico_practico_presencial=carga_teorico_practico,
-            semanal_lab_presencial=carga_lab,
+            total_teoria_presencial=carga_teoria,
+            total_practica_presencial=carga_practica,
+            total_teorico_practico_presencial=carga_teorico_practico,
+            total_lab_presencial=carga_lab,
             carga_rtf=10,
         )
 
@@ -107,10 +107,10 @@ class TestAsignatura(TestCase):
     def test_crear_asignatura_con_carga_bloqueada(self):
         # Para asignatura presencial
         campos_bloqueados = [
-            "semanal_teoria_remoto",
-            "semanal_practica_remoto",
-            "semanal_teorico_practico_remoto",
-            "semanal_lab_remoto",
+            "total_teoria_remoto",
+            "total_practica_remoto",
+            "total_teorico_practico_remoto",
+            "total_lab_remoto",
         ]
 
         datos_default = {
@@ -119,10 +119,10 @@ class TestAsignatura(TestCase):
             "metodologia": MetodologiaAsignatura.PRESENCIAL,
             "bloque_curricular": self.bloque_curricular,
             "semanas_dictado": 16,
-            "semanal_teoria_presencial": 2,
-            "semanal_practica_presencial": 2,
-            "semanal_teorico_practico_presencial": 2,
-            "semanal_lab_presencial": 2,
+            "total_teoria_presencial": 2,
+            "total_practica_presencial": 2,
+            "total_teorico_practico_presencial": 2,
+            "total_lab_presencial": 2,
             "carga_rtf": 20,
         }
 
@@ -140,10 +140,10 @@ class TestAsignatura(TestCase):
 
         # Para asignatura virtual
         campos_bloqueados = [
-            "semanal_teoria_presencial",
-            "semanal_practica_presencial",
-            "semanal_teorico_practico_presencial",
-            "semanal_lab_presencial",
+            "total_teoria_presencial",
+            "total_practica_presencial",
+            "total_teorico_practico_presencial",
+            "total_lab_presencial",
         ]
 
         datos_default = {
@@ -152,10 +152,10 @@ class TestAsignatura(TestCase):
             "metodologia": MetodologiaAsignatura.VIRTUAL,
             "bloque_curricular": self.bloque_curricular,
             "semanas_dictado": 16,
-            "semanal_teoria_remoto": 2,
-            "semanal_practica_remoto": 2,
-            "semanal_teorico_practico_remoto": 2,
-            "semanal_lab_remoto": 2,
+            "total_teoria_remoto": 2,
+            "total_practica_remoto": 2,
+            "total_teorico_practico_remoto": 2,
+            "total_lab_remoto": 2,
             "carga_rtf": 20,
         }
 
@@ -174,10 +174,10 @@ class TestAsignatura(TestCase):
     def test_crear_asignatura_con_carga_faltante(self):
         # Para asignatura presencial
         campos_necesarios = [
-            "semanal_teoria_presencial",
-            "semanal_practica_presencial",
-            "semanal_teorico_practico_presencial",
-            "semanal_lab_presencial",
+            "total_teoria_presencial",
+            "total_practica_presencial",
+            "total_teorico_practico_presencial",
+            "total_lab_presencial",
         ]
 
         datos_default = {
@@ -186,10 +186,10 @@ class TestAsignatura(TestCase):
             "metodologia": MetodologiaAsignatura.PRESENCIAL,
             "bloque_curricular": self.bloque_curricular,
             "semanas_dictado": 16,
-            "semanal_teoria_presencial": 2,
-            "semanal_practica_presencial": 2,
-            "semanal_teorico_practico_presencial": 2,
-            "semanal_lab_presencial": 2,
+            "total_teoria_presencial": 2,
+            "total_practica_presencial": 2,
+            "total_teorico_practico_presencial": 2,
+            "total_lab_presencial": 2,
             "carga_rtf": 20,
         }
 
@@ -207,10 +207,10 @@ class TestAsignatura(TestCase):
 
         # Para asignatura virtual
         campos_necesarios = [
-            "semanal_teoria_remoto",
-            "semanal_practica_remoto",
-            "semanal_teorico_practico_remoto",
-            "semanal_lab_remoto",
+            "total_teoria_remoto",
+            "total_practica_remoto",
+            "total_teorico_practico_remoto",
+            "total_lab_remoto",
         ]
 
         datos_default = {
@@ -219,10 +219,10 @@ class TestAsignatura(TestCase):
             "metodologia": MetodologiaAsignatura.VIRTUAL,
             "bloque_curricular": self.bloque_curricular,
             "semanas_dictado": 16,
-            "semanal_teoria_remoto": 2,
-            "semanal_practica_remoto": 2,
-            "semanal_teorico_practico_remoto": 2,
-            "semanal_lab_remoto": 2,
+            "total_teoria_remoto": 2,
+            "total_practica_remoto": 2,
+            "total_teorico_practico_remoto": 2,
+            "total_lab_remoto": 2,
             "carga_rtf": 20,
         }
 
@@ -240,14 +240,14 @@ class TestAsignatura(TestCase):
 
         # Para asignatura hibrido
         campos_necesarios = [
-            "semanal_teoria_remoto",
-            "semanal_practica_remoto",
-            "semanal_teorico_practico_remoto",
-            "semanal_lab_remoto",
-            "semanal_teoria_presencial",
-            "semanal_practica_presencial",
-            "semanal_teorico_practico_presencial",
-            "semanal_lab_presencial",
+            "total_teoria_remoto",
+            "total_practica_remoto",
+            "total_teorico_practico_remoto",
+            "total_lab_remoto",
+            "total_teoria_presencial",
+            "total_practica_presencial",
+            "total_teorico_practico_presencial",
+            "total_lab_presencial",
         ]
 
         datos_default = {
@@ -256,14 +256,14 @@ class TestAsignatura(TestCase):
             "metodologia": MetodologiaAsignatura.HIBRIDO,
             "bloque_curricular": self.bloque_curricular,
             "semanas_dictado": 16,
-            "semanal_teoria_remoto": 2,
-            "semanal_practica_remoto": 2,
-            "semanal_teorico_practico_remoto": 2,
-            "semanal_lab_remoto": 2,
-            "semanal_teoria_presencial": 2,
-            "semanal_practica_presencial": 2,
-            "semanal_teorico_practico_presencial": 2,
-            "semanal_lab_presencial": 2,
+            "total_teoria_remoto": 2,
+            "total_practica_remoto": 2,
+            "total_teorico_practico_remoto": 2,
+            "total_lab_remoto": 2,
+            "total_teoria_presencial": 2,
+            "total_practica_presencial": 2,
+            "total_teorico_practico_presencial": 2,
+            "total_lab_presencial": 2,
             "carga_rtf": 20,
         }
 

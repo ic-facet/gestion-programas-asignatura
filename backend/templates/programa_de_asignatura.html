@@ -185,53 +185,53 @@
             </tr>
             <tr>
               <td>
-                Horas semanales de clases: {{asignatura.horas_semanales_clases}}
+                Horas totales de clases: {{asignatura.horas_totales_clases}}
               </td>
             </tr>
             <tr>
-              <td>Cantidad semanal de horas de:</td>
+              <td>Cantidad total de horas de:</td>
             </tr>
             <tr>
               <td>
                 <ul>
-                  {% if asignatura.semanal_teoria_presencial %}
+                  {% if asignatura.total_teoria_presencial %}
                   <li>
-                    Teoría presencial: {{ asignatura.semanal_teoria_presencial }}
+                    Teoría presencial: {{ asignatura.total_teoria_presencial }}
                   </li>
                   {% endif %}
-                  {% if asignatura.semanal_practica_presencial %}
+                  {% if asignatura.total_practica_presencial %}
                     <li>
-                      Práctica presencial: {{ asignatura.semanal_practica_presencial }}
+                      Práctica presencial: {{ asignatura.total_practica_presencial }}
                     </li>
                   {% endif %}
-                  {% if asignatura.semanal_teorico_practico_presencial %}
+                  {% if asignatura.total_teorico_practico_presencial %}
                     <li>
-                      Teórico-práctica presencial: {{ asignatura.semanal_teorico_practico_presencial }}
+                      Teórico-práctica presencial: {{ asignatura.total_teorico_practico_presencial }}
                     </li>
                   {% endif %}
-                  {% if asignatura.semanal_lab_presencial %}
+                  {% if asignatura.total_lab_presencial %}
                     <li>
-                      Laboratorios presenciales: {{ asignatura.semanal_lab_presencial }}
+                      Laboratorios presenciales: {{ asignatura.total_lab_presencial }}
                     </li>
                   {% endif %}
-                  {% if asignatura.semanal_teoria_remoto %}
+                  {% if asignatura.total_teoria_remoto %}
                     <li>
-                      Teoría a distancia: {{ asignatura.semanal_teoria_remoto }}
+                      Teoría a distancia: {{ asignatura.total_teoria_remoto }}
                     </li>
                   {% endif %}
-                  {% if asignatura.semanal_practica_remoto %}
+                  {% if asignatura.total_practica_remoto %}
                     <li>
-                      Práctica a distancia: {{ asignatura.semanal_practica_remoto }}
+                      Práctica a distancia: {{ asignatura.total_practica_remoto }}
                     </li>
                   {% endif %}
-                  {% if asignatura.semanal_teorico_practico_remoto %}
+                  {% if asignatura.total_teorico_practico_remoto %}
                     <li>
-                      Teórico-práctica a distancia: {{ asignatura.semanal_teorico_practico_remoto }}
+                      Teórico-práctica a distancia: {{ asignatura.total_teorico_practico_remoto }}
                     </li>
                   {% endif %}
-                  {% if asignatura.semanal_lab_remoto %}
+                  {% if asignatura.total_lab_remoto %}
                     <li>
-                      Laboratorios a distancia: {{ asignatura.semanal_lab_remoto }}
+                      Laboratorios a distancia: {{ asignatura.total_lab_remoto }}
                     </li>
                   {% endif %}
                 </ul>
