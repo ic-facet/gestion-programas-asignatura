@@ -18,13 +18,37 @@ Es necesario crear un superusuario, y para eso se debe ingresar al container del
 Para poder correr las funcionalidades del sistema, es necesario correr el backend. 
 
 ## Setup del backend
-1. Crear entorno virtual de python, con versión de Python `3.11.4`.
-2. Activar el entorno virtual.
-3. Instalar dependencias con `pip install -r requirements.txt`
-4. **[Solo Windows]** Instalar GTK para generación de PDFs (ver sección abajo)
-5. Correr las migraciones con `python manage.py migrate`
-6. Crear instancias de prueba con el comando `python manage.py setup`
-7. Correr el servidor con `python manage.py runserver`
+1. **Primero navega a la carpeta del proyecto** (si no estás en ella):
+   ```bash
+   cd C:\Users\tu-usuario\ruta\al\proyecto\gestion-programas-asignatura
+   ```
+
+2. **Crear el entorno virtual** de python con versión `3.11.4`:
+   ```bash
+   python -m venv venv
+   ```
+
+3. **Activar el entorno virtual**:
+   - **Windows (CMD):**
+     ```bash
+     venv\Scripts\activate
+     ```
+   - **Windows (PowerShell):**
+     ```bash
+     venv\Scripts\Activate.ps1
+     ```
+   - **Linux/Mac:**
+     ```bash
+     source venv/bin/activate
+     ```
+
+   Una vez activado, deberías ver `(venv)` al inicio de la línea de comandos.
+
+4. Instalar dependencias con `pip install -r requirements.txt`
+5. **[Solo Windows]** Instalar GTK para generación de PDFs (ver sección abajo)
+6. Correr las migraciones con `python manage.py migrate`
+7. Crear instancias de prueba con el comando `python manage.py setup`
+8. Correr el servidor con `python manage.py runserver`
 
 Se puede visitar el Administrador de Django se debe:
 1. Crear un superusuario con `python manage.py createsuperuser`, y seguir los pasos indicados en la terminal.
