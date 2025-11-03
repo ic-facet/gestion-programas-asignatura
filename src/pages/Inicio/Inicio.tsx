@@ -32,7 +32,7 @@ const Inicio: React.FC = () => {
             <b>¡Bienvenido a SGPA!</b>
           </TituloFuncionalidad>
           <DescripcionFuncionalidad>
-            <b>Sistema de Gestion para Programas de Asignautra</b> para la
+            <b>Sistema de Gestión para Programas de Asignatura</b> para la
             Facultad de Ciencias Exactas y Tecnología de la Universidad Nacional
             de Tucumán.
             <br />

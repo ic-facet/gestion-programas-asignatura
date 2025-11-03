@@ -4,7 +4,13 @@ import TablaPlanesEstudio from './TablasPlanesEstudio/TablaPlanesEstudio'
 import usePlanesDeEstudio from './hooks/usePlanesDeEstudio'
 import { getMatrizDeTributacion } from './servicios'
 import { Modal, Titulo, Subtitulo } from '../../components'
-import './Matriz.css'
+import {
+  Container,
+  Header,
+  TableContainer,
+  LoadingContainer,
+  ErrorContainer
+} from './MatrizStyled'
 
 const COLUMNAS_TABLA = ['Plan de Estudio', 'Carrera', 'Acciones']
 
@@ -49,7 +55,7 @@ const Matriz: React.FC = () => {
   }
 
   return (
-    <div className="container-matriz">
+    <Container>
       <Modal
         open={modalIsOpen}
         onClose={() => setModalIsOpen(false)}
@@ -57,25 +63,31 @@ const Matriz: React.FC = () => {
       >
         <div>{mensajeDeError}</div>
       </Modal>
-      <div className="cabecera-matriz">
+
+      <Header>
         <Titulo>Generar Reportes</Titulo>
         <Subtitulo>Matriz de Tributación</Subtitulo>
-      </div>
+      </Header>
 
       {loading ? (
-        <div>Loading...</div>
+        <LoadingContainer>
+          Cargando planes de estudio...
+        </LoadingContainer>
       ) : error ? (
-        <div>{error}</div>
+        <ErrorContainer>
+          <i className="fas fa-exclamation-triangle" />
+          {error}
+        </ErrorContainer>
       ) : (
-        <div className="tabla-planes">
+        <TableContainer>
           <TablaPlanesEstudio
             tableColumns={COLUMNAS_TABLA}
             tableData={planesDeEstudio}
             generarMatriz={handleGenerarMatriz}
           />
-        </div>
+        </TableContainer>
       )}
-    </div>
+    </Container>
   )
 }
 

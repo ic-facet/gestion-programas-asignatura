@@ -5,6 +5,7 @@ import { MODOS_PROGRAMA_ASIGNATURA } from '../../constants/constants'
 import { client } from '../../utils/axiosClient'
 import { RUTAS_PAGINAS } from '../../constants/constants'
 import { Titulo } from '../../components'
+import { Container, Content } from './ProgramasVigentesStyled'
 
 export default function ProgramasVigentes() {
   const navigate = useNavigate()
@@ -47,16 +48,18 @@ export default function ProgramasVigentes() {
   }
 
   return (
-    <section className="section-content">
-      <Titulo>Programas Vigentes</Titulo>
-      <TableProgramasVigentes
-        tableColumns={tableColumns}
-        tableData={programasVigentes}
-        verPrograma={verPrograma}
-        imprimir={imprimir}
-        isLoading={loading}
-        error={error}
-      />
-    </section>
+    <Container>
+      <Content>
+        <Titulo>Programas Vigentes</Titulo>
+        <TableProgramasVigentes
+          tableColumns={tableColumns}
+          tableData={programasVigentes}
+          verPrograma={verPrograma}
+          imprimir={imprimir}
+          isLoading={loading}
+          error={error}
+        />
+      </Content>
+    </Container>
   )
 }

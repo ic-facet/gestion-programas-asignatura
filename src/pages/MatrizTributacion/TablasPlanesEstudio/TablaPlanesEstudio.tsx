@@ -1,4 +1,5 @@
 import { PlanesDeEstudioInterface } from 'interfaces/interfaces'
+import { StyledTable, ActionIcon } from '../MatrizStyled'
 
 interface TableProps {
   tableColumns: string[]
@@ -14,7 +15,7 @@ export default function TablaPlanesEstudio({
 }: TableProps) {
   return (
     <article>
-      <table className="content-table">
+      <StyledTable>
         <thead>
           <tr>
             {tableColumns.map((column) => (
@@ -28,17 +29,16 @@ export default function TablaPlanesEstudio({
               <td>{item.nombre}</td>
               <td>{item.carreraNombre}</td>
               <td id="column-acciones">
-                <i
-                  style={{ cursor: 'pointer' }}
+                <ActionIcon
                   className="fa fa-file-excel"
                   onClick={() => generarMatriz(item.id, item.carreraId)}
-                  title="Generar Matriz"
-                ></i>
+                  title="Generar Matriz de Tributación"
+                />
               </td>
             </tr>
           ))}
         </tbody>
-      </table>
+      </StyledTable>
     </article>
   )
 }
