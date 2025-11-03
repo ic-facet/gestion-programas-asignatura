@@ -5,17 +5,19 @@ import './App.css'
 import { Navbar, ProtectedRoute, Spinner, MainContentContainer } from './components'
 import { PAGINAS } from './constants/constants'
 import { AuthProvider } from './context/authProvider'
+import { useAuth } from './hooks/useAuth'
 
-export default function App() {
+function AppContent() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const { auth } = useAuth()
 
   return (
-    <AuthProvider>
+    <>
       <Navbar
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
       />
-      <MainContentContainer>
+      <MainContentContainer $hasNavbar={auth.isLoggedIn}>
         <Suspense fallback={<Spinner />}>
           <Routes>
             {PAGINAS
@@ -39,6 +41,14 @@ export default function App() {
           </Routes>
         </Suspense>
       </MainContentContainer>
+    </>
+  )
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
     </AuthProvider>
   )
 }
