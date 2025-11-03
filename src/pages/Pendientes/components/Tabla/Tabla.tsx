@@ -1,12 +1,19 @@
 import { useNavigate } from 'react-router-dom'
 
 import { Spinner } from '../../../../components'
-import './Tabla.css'
 import {
   RUTAS_PAGINAS,
   MODOS_PROGRAMA_ASIGNATURA
 } from '../../../../constants/constants'
 import useTareasPendientes from '../../hooks/useTareasPendientes'
+import {
+  TableWrapper,
+  StyledTable,
+  ActionIcon,
+  LoadingContainer,
+  EmptyRow,
+  ErrorRow
+} from '../../PendientesStyled'
 
 export default function Tabla() {
   const { tareasPendientes, loading, error } = useTareasPendientes()
@@ -48,21 +55,12 @@ export default function Tabla() {
   }
 
   return loading ? (
-    <div
-      style={{
-        width: '300px',
-        height: '300px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: '0 auto'
-      }}
-    >
+    <LoadingContainer>
       <Spinner />
-    </div>
+    </LoadingContainer>
   ) : (
-    <article>
-      <table className="content-table">
+    <TableWrapper>
+      <StyledTable>
         <thead>
           <tr>
             {columnasTablaPendientes.map((column) => (
@@ -81,47 +79,47 @@ export default function Tabla() {
                     {item.accionesPosibles && (
                       <>
                         {item.accionesPosibles.verPrograma && (
-                          <i
+                          <ActionIcon
                             onClick={() => handleVerPrograma(item.idPrograma)}
-                            className="fas fa-eye boton-accion"
+                            className="fas fa-eye"
                             title="Ver programa"
-                          ></i>
+                          />
                         )}
                         {item.accionesPosibles.modificarPrograma && (
-                          <i
+                          <ActionIcon
                             onClick={() =>
                               handleModificarPrograma(item.idPrograma)
                             }
-                            className="fas fa-edit boton-accion"
+                            className="fas fa-edit"
                             title="Editar programa"
-                          ></i>
+                          />
                         )}
                         {item.accionesPosibles.modificarUltimo && (
-                          <i
+                          <ActionIcon
                             onClick={() =>
                               handleModificarAPartirUltimo(item.asignatura.id)
                             }
-                            className="fas fa-sync boton-accion"
-                            title="Modificar a partir del ultimo program"
-                          ></i>
+                            className="fas fa-sync"
+                            title="Modificar a partir del último programa"
+                          />
                         )}
                         {item.accionesPosibles.nuevo && (
-                          <i
+                          <ActionIcon
                             onClick={() =>
                               handleCrearNuevoPrograma(item.asignatura.id)
                             }
-                            className="fas fa-plus boton-accion"
+                            className="fas fa-plus"
                             title="Nuevo programa"
-                          ></i>
+                          />
                         )}
                         {item.accionesPosibles.revisarPrograma && (
-                          <i
+                          <ActionIcon
                             onClick={() =>
                               handleRevisarPrograma(item.idPrograma)
                             }
-                            className="fas fa-check boton-accion"
+                            className="fas fa-check"
                             title="Revisar programa"
-                          ></i>
+                          />
                         )}
                       </>
                     )}
@@ -130,16 +128,22 @@ export default function Tabla() {
               ))}
             </>
           ) : error ? (
-            <tr>
-              <td>Ocurrió un error al momento de realizar la búsqueda</td>
-            </tr>
+            <ErrorRow>
+              <td colSpan={3}>
+                <i className="fas fa-exclamation-triangle" />
+                Ocurrió un error al momento de realizar la búsqueda
+              </td>
+            </ErrorRow>
           ) : (
-            <tr>
-              <td>No hay datos que coincidan con la búsqueda</td>
-            </tr>
+            <EmptyRow>
+              <td colSpan={3}>
+                <i className="fas fa-inbox" />
+                No hay tareas pendientes
+              </td>
+            </EmptyRow>
           )}
         </tbody>
-      </table>
-    </article>
+      </StyledTable>
+    </TableWrapper>
   )
 }

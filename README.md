@@ -1,34 +1,66 @@
 # Gestión de Programas de Asignatura
 
 # Setup con Docker!
+
 1. Setear variables de entorno en el archivo `.env` del frontend y del backend
 2. En el root del proyecto, correr el siguiente comando: `docker compose up`
 
-LISTO! Ahora se puede acceder a `http://127.0.0.1:5173` para ver el proyecto. 
+LISTO! Ahora se puede acceder a `http://127.0.0.1:5173` para ver el proyecto.
 Si se quiere acceder al panel de admin de django, se debe acceder a `http://127.0.0.1:8000/admin/`.
 Es necesario crear un superusuario, y para eso se debe ingresar al container del backend y crear un superusuario con `python manage.py createsuperuser`
 
 # SI NO SE USA DOCKER SEGUIR LAS SIGUIENTES INSTRUCCIONES
+
 ## Setup de frontend
+
 1. Instalar dependencias con `npm install`
-2. Setear variables de entorno en el archivo `.env`
+2. Setear variables de entorno en el archivo `.env` (ver sección de Variables de Entorno abajo)
 3. Correr servidor con `npm run dev`
 4. Se puede visitar la pagina en `http://127.0.0.1:5173`
 
-Para poder correr las funcionalidades del sistema, es necesario correr el backend. 
+Para poder correr las funcionalidades del sistema, es necesario correr el backend.
+
+### Login de Desarrollo (Solo Local)
+
+Para desarrollo local, puedes usar el **Login de Desarrollo** sin necesidad de configurar OAuth de Google:
+
+1. Asegúrate de tener estas variables en tu `.env`:
+
+   ```
+   VITE_DEV_MODE=true
+   VITE_ENABLE_MSW=true
+   ```
+
+2. Inicia el frontend con `npm run dev`
+
+3. En la página de login verás un botón naranja "🔧 Login de Desarrollo (Solo Local)"
+
+4. Haz clic en ese botón para entrar automáticamente como usuario de desarrollo con todos los permisos
+
+**Nota:** Este botón solo aparece cuando `VITE_DEV_MODE=true` y está diseñado exclusivamente para desarrollo local. En producción, siempre se usará autenticación de Google.
+
+El usuario de desarrollo tiene:
+
+- Email: `dev@facet.unt.edu.ar`
+- Nombre: Usuario Desarrollo
+- Todos los roles: Administrador, Director, Docente y Secretario Académico
 
 ## Setup del backend
+
 1. **Primero navega a la carpeta del proyecto** (si no estás en ella):
+
    ```bash
    cd C:\Users\tu-usuario\ruta\al\proyecto\gestion-programas-asignatura
    ```
 
 2. **Crear el entorno virtual** de python con versión `3.11.4`:
+
    ```bash
    python -m venv venv
    ```
 
 3. **Activar el entorno virtual**:
+
    - **Windows (CMD):**
      ```bash
      venv\Scripts\activate
@@ -54,10 +86,12 @@ Para poder correr las funcionalidades del sistema, es necesario correr el backen
 8. Correr el servidor con `python manage.py runserver`
 
 Se puede visitar el Administrador de Django se debe:
+
 1. Crear un superusuario con `python manage.py createsuperuser`, y seguir los pasos indicados en la terminal.
 2. Visitar `http://127.0.0.1:8000/admin/`, e iniciar sesión
 
 El comando de `setup` crea las siguientes instancias:
+
 - 3 Carreras
 - 1 plan de estudio activo por carrera y uno inactivo por carrera
 - 3 años lectivos: uno arrancando el año pasado de corrido el comando, otro iniciando en el año actual, y otro el año siguiente
@@ -65,11 +99,12 @@ El comando de `setup` crea las siguientes instancias:
 - 1 estándar por carrera
 - 3 Actividades Reservadas por estándar
 - 9 Descriptores y 9 ejes reservados. Cada carrera tiene 2 descriptores y ejes reservados que le pertenecen y 3 de cada uno compartido entre todos
-- 12 asignaturas. 3 asignaturas son únicas para cada carrera, y 3 asignaturas compartidas. 4 serán híbridas, 4 presenciales y 4 virtuales 
+- 12 asignaturas. 3 asignaturas son únicas para cada carrera, y 3 asignaturas compartidas. 4 serán híbridas, 4 presenciales y 4 virtuales
 
 ## Configuración adicional para Windows (Desarrollo Local)
 
 ### Instalación de GTK para generación de PDFs
+
 WeasyPrint requiere GTK en Windows para generar PDFs. Sigue estos pasos:
 
 1. Descarga GTK Runtime: https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases
@@ -80,7 +115,9 @@ WeasyPrint requiere GTK en Windows para generar PDFs. Sigue estos pasos:
 **Nota:** En servidores Linux (producción), GTK se instala automáticamente con las dependencias del sistema.
 
 ### Alternativa: Desarrollo sin PDFs
+
 Si no necesitas generar PDFs durante el desarrollo:
+
 1. Comenta la importación en `backend/views/__init__.py`:
    ```python
    # from .programas_de_asignatura.pdf.generar_pdf import GenerarPDF
@@ -88,11 +125,14 @@ Si no necesitas generar PDFs durante el desarrollo:
 2. Comenta las líneas relacionadas en `backend/urls.py`
 
 ### Redis (Opcional para desarrollo local)
+
 Redis es necesario para tareas asíncronas (Celery). Para desarrollo local sin Redis:
+
 - El proyecto funcionará sin tareas asíncronas
 - Para instalar Redis en Windows: https://github.com/microsoftarchive/redis/releases
 
 ## Cómo asignar un Rol a un usuario?
+
 1. Ingresar a el panel de Administración.
 2. Ingresar al modelo Usuarios.
-3. Elegir el usuario que se quiere asignar un rol, y elegir el tipo de rol, y la opción extra requerida para el usuario. Un Director de Carrera debe seleccionar una carrera. Un titular de cátedra o docente debe seleccionar una asignatura. El Secretario académico no debe elegir ni carrera ni asignatura. 
+3. Elegir el usuario que se quiere asignar un rol, y elegir el tipo de rol, y la opción extra requerida para el usuario. Un Director de Carrera debe seleccionar una carrera. Un titular de cátedra o docente debe seleccionar una asignatura. El Secretario académico no debe elegir ni carrera ni asignatura.

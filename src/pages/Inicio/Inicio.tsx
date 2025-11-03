@@ -27,11 +27,12 @@ const Inicio: React.FC = () => {
     <>
       <Portada>
         <TextoBienvenidaContainer>
+          <LogoFacet src={img.FACETNoBackground} />
           <TituloFuncionalidad>
             <b>¡Bienvenido a SGPA!</b>
           </TituloFuncionalidad>
           <DescripcionFuncionalidad>
-            <b>Sistema de Gestion para Programas de Asignautra</b> para la
+            <b>Sistema de Gestión para Programas de Asignatura</b> para la
             Facultad de Ciencias Exactas y Tecnología de la Universidad Nacional
             de Tucumán.
             <br />
@@ -51,39 +52,37 @@ const Inicio: React.FC = () => {
             )}
           </DescripcionFuncionalidad>
         </TextoBienvenidaContainer>
-        <LogoFacet src={img.FACETNoBackground} />
       </Portada>
-      <Division>Explore las funcionalidades del Sistema</Division>
+      <Division>Explore las Funcionalidades del Sistema</Division>
       <SeccionFuncionalidades>
         <Funcionalidad>
           <IconoFuncionalidad>
-            <i className="fas fa-regular fa-file" />
+            <i className="fas fa-file-alt" />
           </IconoFuncionalidad>
-          <TituloFuncionalidad>Generación de informes</TituloFuncionalidad>
+          <TituloFuncionalidad>Generación de Informes</TituloFuncionalidad>
           <DescripcionFuncionalidad>
-            Permite generar informes sobre las distintas asignaturas de cada
-            carrera, por ejemplo, generación de la matriz de tributación.
+            Genere informes completos sobre las asignaturas de cada carrera,
+            incluyendo la matriz de tributación y análisis académicos.
           </DescripcionFuncionalidad>
         </Funcionalidad>
         <Funcionalidad>
           <IconoFuncionalidad>
-            <i className="fas fa-regular fa-clock" />
+            <i className="fas fa-history" />
           </IconoFuncionalidad>
-          <TituloFuncionalidad>historial de programas</TituloFuncionalidad>
+          <TituloFuncionalidad>Historial de Programas</TituloFuncionalidad>
           <DescripcionFuncionalidad>
-            Filtrar, y buscar programas de asignaturas de distintos semestres y
-            años lectivos. También descargar los programas en PDF.
+            Filtre y busque programas de asignaturas de diferentes períodos
+            académicos. Descargue documentos en formato PDF.
           </DescripcionFuncionalidad>
         </Funcionalidad>
         <Funcionalidad>
           <IconoFuncionalidad>
-            <i className="fas fa-solid fa-pen" />
+            <i className="fas fa-edit" />
           </IconoFuncionalidad>
-          <TituloFuncionalidad>actualización de programas</TituloFuncionalidad>
+          <TituloFuncionalidad>Actualización de Programas</TituloFuncionalidad>
           <DescripcionFuncionalidad>
-            Permite a los docentes actualizar los programas de asignatura para
-            cada semestre de cursado, y a directores de carrera validar los
-            cambios.
+            Los docentes pueden actualizar programas de asignatura y los
+            directores de carrera pueden validar los cambios realizados.
           </DescripcionFuncionalidad>
         </Funcionalidad>
       </SeccionFuncionalidades>

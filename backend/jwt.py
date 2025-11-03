@@ -41,7 +41,9 @@ class CustomJWTAuthentication(authentication.JWTAuthentication):
         If the refresh token is valid, generates a new access token and lets the user pass.
         If the refresh token is not valid, raises a AuthenticationFailed exception.
         """
-        self.enforce_csrf(request)
+        # Solo validar CSRF en producción
+        if not settings.DEBUG:
+            self.enforce_csrf(request)
 
         if (
             IsAuthenticated

@@ -1,6 +1,13 @@
 import { Spinner } from '../../../components'
-import '../../../components/Table/Table.css'
 import { MODOS_PROGRAMA_ASIGNATURA } from '../../../constants/constants'
+import {
+  TableWrapper,
+  StyledTable,
+  ActionIcon,
+  LoadingContainer,
+  EmptyRow,
+  ErrorRow
+} from '../ProgramasVigentesStyled'
 
 type tableRow = {
   id: number | string
@@ -45,25 +52,16 @@ export default function Table({
   // Si acciones no es null entonces renderizamos esa columna
 
   return isLoading ? (
-    <div
-      style={{
-        width: '300px',
-        height: '300px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: '0 auto'
-      }}
-    >
+    <LoadingContainer>
       <Spinner />
-    </div>
+    </LoadingContainer>
   ) : (
-    <article>
-      <table className="content-table">
+    <TableWrapper>
+      <StyledTable>
         <thead>
           <tr>
-            {tableColumns.map((column) => (
-              <th>{column}</th>
+            {tableColumns.map((column, index) => (
+              <th key={index}>{column}</th>
             ))}
           </tr>
         </thead>
@@ -78,7 +76,7 @@ export default function Table({
                     {item.acciones_posibles ? (
                       <>
                         {item.acciones_posibles.ver_programa ? (
-                          <i
+                          <ActionIcon
                             onClick={() =>
                               verPrograma(
                                 item.id,
@@ -87,10 +85,10 @@ export default function Table({
                             }
                             className="fas fa-eye"
                             title="Ver programa"
-                          ></i>
+                          />
                         ) : null}
                         {item.acciones_posibles.imprimir ? (
-                          <i
+                          <ActionIcon
                             onClick={() =>
                               imprimir(
                                 item.id,
@@ -98,8 +96,8 @@ export default function Table({
                               )
                             }
                             className="fas fa-print"
-                            title="Imprimir"
-                          ></i>
+                            title="Descargar PDF"
+                          />
                         ) : null}
                       </>
                     ) : null}
@@ -108,16 +106,22 @@ export default function Table({
               ))}
             </>
           ) : error ? (
-            <tr>
-              <td>Ocurrió un error al momento de realizar la búsqueda</td>
-            </tr>
+            <ErrorRow>
+              <td colSpan={3}>
+                <i className="fas fa-exclamation-triangle" />
+                Ocurrió un error al momento de realizar la búsqueda
+              </td>
+            </ErrorRow>
           ) : (
-            <tr>
-              <td>No hay datos que coincidan con la búsqueda</td>
-            </tr>
+            <EmptyRow>
+              <td colSpan={3}>
+                <i className="fas fa-inbox" />
+                No hay programas vigentes
+              </td>
+            </EmptyRow>
           )}
         </tbody>
-      </table>
-    </article>
+      </StyledTable>
+    </TableWrapper>
   )
 }

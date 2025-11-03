@@ -1,11 +1,32 @@
 import React, { useCallback } from 'react'
-import './Login.css'
+import { useNavigate } from 'react-router-dom'
 import img from '../../img'
 import { RUTAS_PAGINAS } from '../../constants/constants'
+import { DEV_MODE } from '../../helpers/env-variables'
+import { useAuth } from '../../hooks/useAuth'
+import { client } from '../../utils/axiosClient'
+import {
+  Container,
+  Card,
+  ProfileImage,
+  LogoContainer,
+  LogoUNT,
+  LogoFACET,
+  LoginTitle,
+  LoginSubtitle,
+  LoginH3,
+  Text,
+  LoginButton,
+  Divider
+} from './LoginStyled'
+
 const BASE_FRONTEND_URL = import.meta.env.VITE_BASE_FRONTEND_URL
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_OAUTH2_CLIENT_ID
 
 const Login: React.FC = () => {
+  const navigate = useNavigate()
+  const { getAuthUser } = useAuth()
+
   const openGoogleLoginPage = useCallback(() => {
     const googleAuthUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
 
@@ -28,33 +49,59 @@ const Login: React.FC = () => {
     window.location.href = url
   }, [])
 
-  return (
-    <div className="container">
-      <div className="card">
-        <div className="profile-image">
-          <i className="fas fa-user" />
-        </div>
+  const handleDevLogin = useCallback(async () => {
+    try {
+      await client.post('auth/dev-login/')
+      await getAuthUser()
+      navigate(RUTAS_PAGINAS.INICIO)
+    } catch (error) {
+      console.error('Error en login de desarrollo:', error)
+    }
+  }, [navigate, getAuthUser])
 
-        <img className="logo-unt" src={img.UNT} />
-        <img className="logo-facet" src={img.FACET} />
-        <h1 className="login-title">
-          Sistema de Gestion de Programas de Asignatura
-        </h1>
-        <h2 className="login-subtitle">
+  return (
+    <Container>
+      <Card>
+        <ProfileImage>
+          <i className="fas fa-user" />
+        </ProfileImage>
+
+        <LogoContainer>
+          <LogoUNT src={img.UNT} alt="Logo UNT" />
+          <LogoFACET src={img.FACET} alt="Logo FACET" />
+        </LogoContainer>
+
+        <LoginTitle>
+          Sistema de Gestión de Programas de Asignatura
+        </LoginTitle>
+        <LoginSubtitle>
           Facultad de Ciencias Exactas y Tecnología
-        </h2>
-        <h3 className="login-h3">Universidad Nacional de Tucumán</h3>
-        <p className="text">
-          Para poder acceder a las funciones del sistema, debe iniciar sesión
-          con Google. Si es su primera vez ingresando, debe comunicarse con el
-          administrador del sistema para dar acceso.
-        </p>
-        <button onClick={openGoogleLoginPage} className="login-button">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" />
-          <p>Iniciar sesion con Google</p>
-        </button>
-      </div>
-    </div>
+        </LoginSubtitle>
+        <LoginH3>Universidad Nacional de Tucumán</LoginH3>
+
+        <Text>
+          Para acceder a las funciones del sistema, inicie sesión con Google.
+          Si es su primera vez, comuníquese con el administrador para obtener acceso.
+        </Text>
+
+        <LoginButton onClick={openGoogleLoginPage}>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
+            alt="Google"
+          />
+          <p>Iniciar sesión con Google</p>
+        </LoginButton>
+
+        {DEV_MODE && (
+          <>
+            <Divider>o</Divider>
+            <LoginButton onClick={handleDevLogin} $isDev>
+              <p>🔧 Login de Desarrollo (Solo Local)</p>
+            </LoginButton>
+          </>
+        )}
+      </Card>
+    </Container>
   )
 }
 

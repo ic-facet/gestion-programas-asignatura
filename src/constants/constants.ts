@@ -392,15 +392,6 @@ export const PAGINAS: Pagina[] = [
     protectedByLogin: true
   },
   {
-    key: 'editar-programa-asignatura',
-    title: 'Editar Programa Asignatura',
-    path: `${RUTAS_PAGINAS.PROGRAMA_DE_ASIGNATURA}`,
-    enabled: true,
-    component: ProgramaAsignatura,
-    modo: MODOS_PROGRAMA_ASIGNATURA.EDITAR,
-    protectedByLogin: true
-  },
-  {
     key: 'login',
     title: 'Iniciar Sesion',
     path: RUTAS_PAGINAS.LOGIN,
