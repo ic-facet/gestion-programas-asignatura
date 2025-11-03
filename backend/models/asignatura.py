@@ -44,7 +44,7 @@ class Asignatura(models.Model):
     total_teorico_practico_remoto = models.PositiveIntegerField(blank=True, null=True)
     total_lab_remoto = models.PositiveIntegerField(blank=True, null=True)
     horas_evaluacion = models.PositiveIntegerField(blank=True, null=True)
-    carga_rtf = models.PositiveIntegerField()
+    carga_rtf = models.DecimalField(max_digits=6, decimal_places=2)
 
     # Si es null, la materia se dicta ambos cuatrimestres
     semestre_dictado = models.CharField(

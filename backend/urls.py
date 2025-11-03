@@ -41,6 +41,7 @@ from backend.views import (
     AsignaturasDisponiblesAPartirAsignatura,
     AsignaturasDisponiblesAPartirPrograma,
     LogoutAPI,
+    DevLoginAPI,
 )
 
 informes_patterns = [
@@ -96,6 +97,7 @@ planes_estudio_patterns = [
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/logout/", LogoutAPI.as_view()),
+    path("auth/dev-login/", DevLoginAPI.as_view()),
     path("auth/login/google/", GoogleLoginApi.as_view(), name="login-with-google"),
     path("auth/me/", GoogleAuthApi.as_view()),
     path("api/programas/", include(programas_patterns)),

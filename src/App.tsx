@@ -1,11 +1,10 @@
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 
-import { Navbar } from './components'
+import { Navbar, ProtectedRoute, Spinner, MainContentContainer } from './components'
 import { PAGINAS } from './constants/constants'
 import { AuthProvider } from './context/authProvider'
-import { MainContentContainer } from './components'
 
 export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -17,24 +16,28 @@ export default function App() {
         setIsSidebarOpen={setIsSidebarOpen}
       />
       <MainContentContainer>
-        {/* <ProtectedRoute> */}
-        <Routes>
-          {PAGINAS.map((pagina) => (
-            <Route
-              key={pagina.key}
-              path={pagina.path}
-              element={
-                pagina.modo ? (
-                  <pagina.component modo={pagina.modo} />
-                ) : (
-                  <pagina.component />
-                )
-              }
-            />
-          ))}
-          <Route path="*" element={<h1>Not found</h1>} />
-        </Routes>
-        {/* </ProtectedRoute> */}
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            {PAGINAS
+              .filter((pagina) => pagina.enabled) // Solo renderizar rutas habilitadas
+              .map((pagina) => (
+                <Route
+                  key={pagina.key}
+                  path={pagina.path}
+                  element={
+                    <ProtectedRoute requiresAuth={pagina.protectedByLogin}>
+                      {pagina.modo ? (
+                        <pagina.component modo={pagina.modo} />
+                      ) : (
+                        <pagina.component />
+                      )}
+                    </ProtectedRoute>
+                  }
+                />
+              ))}
+            <Route path="*" element={<h1>Página no encontrada</h1>} />
+          </Routes>
+        </Suspense>
       </MainContentContainer>
     </AuthProvider>
   )

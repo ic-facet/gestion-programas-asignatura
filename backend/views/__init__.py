@@ -21,3 +21,4 @@ from .informacion_para_formularios import (
 )
 
 from .authentication import GoogleLoginApi, GoogleAuthApi, LogoutAPI
+from .dev_auth import DevLoginAPI

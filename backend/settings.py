@@ -17,15 +17,15 @@ import environ
 from datetime import timedelta
 import dj_database_url
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 # Inicializar las variables de entorno
 env = environ.Env()
-environ.Env.read_env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 BASE_URL = env.str("DJANGO_BASE_URL", default=env.str("BASE_URL", default=""))
 ENVIRONMENT = env.str("ENVIRONMENT", "development")
 POSTGRESS_LOCALLY = env.bool("POSTGRESS_LOCALLY", False)
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -211,9 +211,11 @@ CELERY_RESULT_BACKEND = env.str("CELERY_BROKER_URL", "redis://redis:6379/0")
 CUSTOM_AUTH_ACCESS_COOKIE = "TAT"
 CUSTOM_TEMPORAL_NEW_ACCESS_COOKIE = "temporary-access"
 CUSTOM_AUTH_REFRESH_COOKIE = "TRT"
-CUSTOM_AUTH_COOKIE_SECURE = True
+# En desarrollo local (HTTP), secure debe ser False. En producción (HTTPS), debe ser True.
+CUSTOM_AUTH_COOKIE_SECURE = not DEBUG
 CUSTOM_AUTH_COOKIE_HTTP_ONLY = True
-CUSTOM_AUTH_COOKIE_SAMESITE = "Strict"
+# En desarrollo local, Lax permite que las cookies funcionen correctamente
+CUSTOM_AUTH_COOKIE_SAMESITE = "Lax" if DEBUG else "Strict"
 CORS_ALLOW_METHODS = ["GET", "POST"]
 
 # Jazzmin Configuration
