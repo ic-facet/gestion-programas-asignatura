@@ -18,8 +18,14 @@ Es necesario crear un superusuario, y para eso se debe ingresar al container del
 Para poder correr las funcionalidades del sistema, es necesario correr el backend. 
 
 ## Setup del backend
-1. Crear entorno virtual de python, con versión de Python `3.11.4`.
-2. Activar el entorno virtual.
+1. Crear entorno virtual de python, con versión de Python `3.11.4`:
+   ```bash
+   python -m venv venv
+   ```
+2. Activar el entorno virtual:
+   - **Windows (CMD)**: `venv\Scripts\activate.bat`
+   - **Windows (PowerShell)**: `venv\Scripts\Activate.ps1`
+   - **Linux/Mac**: `source venv/bin/activate`
 3. Instalar dependencias con `pip install -r requirements.txt`
 4. **[Solo Windows]** Instalar GTK para generación de PDFs (ver sección abajo)
 5. Correr las migraciones con `python manage.py migrate`
