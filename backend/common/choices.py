@@ -73,6 +73,7 @@ class ParametrosDeConfiguracion(TextChoices):
         "IPC",
         "Días previos al inicio del Semestre para Corregir el Programa",
     )
+    CREDITOS_UNT = "CU", "Creditos UNT"
 
 
 class EstadosAprobacionPrograma(TextChoices):

@@ -44,8 +44,8 @@ export const Container = styled.div`
 export const Card = styled.div`
   position: relative;
   width: 100%;
-  max-width: 550px;
-  padding: 100px 50px 50px;
+  max-width: 500px;
+  padding: 70px 40px 40px;
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   border-radius: 30px;
@@ -69,22 +69,22 @@ export const Card = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 90px 30px 40px;
+    padding: 65px 30px 35px;
     max-width: 95%;
   }
 `
 
 export const ProfileImage = styled.div`
   position: absolute;
-  height: 140px;
-  width: 140px;
+  height: 110px;
+  width: 110px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-  top: -70px;
+  top: -55px;
   z-index: 2;
   transition: transform 0.3s ease;
 
@@ -93,17 +93,17 @@ export const ProfileImage = styled.div`
   }
 
   i {
-    font-size: 75px;
+    font-size: 60px;
     color: white;
   }
 
   @media (max-width: 768px) {
-    height: 120px;
-    width: 120px;
-    top: -60px;
+    height: 100px;
+    width: 100px;
+    top: -50px;
 
     i {
-      font-size: 65px;
+      font-size: 55px;
     }
   }
 `
@@ -118,7 +118,7 @@ export const LogoContainer = styled.div`
 `
 
 export const LogoUNT = styled.img`
-  height: 70px;
+  height: 60px;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
   transition: transform 0.3s ease;
 
@@ -127,12 +127,12 @@ export const LogoUNT = styled.img`
   }
 
   @media (max-width: 768px) {
-    height: 55px;
+    height: 50px;
   }
 `
 
 export const LogoFACET = styled.img`
-  height: 70px;
+  height: 60px;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
   transition: transform 0.3s ease;
 
@@ -141,13 +141,13 @@ export const LogoFACET = styled.img`
   }
 
   @media (max-width: 768px) {
-    height: 55px;
+    height: 50px;
   }
 `
 
 export const LoginTitle = styled.h1`
-  margin-top: 25px;
-  font-size: 26px;
+  margin-top: 15px;
+  font-size: 24px;
   font-weight: 700;
   text-align: center;
   width: 90%;
@@ -156,48 +156,48 @@ export const LoginTitle = styled.h1`
   letter-spacing: 0.5px;
 
   @media (max-width: 768px) {
-    font-size: 22px;
+    font-size: 21px;
   }
 `
 
 export const LoginSubtitle = styled.h2`
-  margin-top: 15px;
+  margin-top: 10px;
   text-align: center;
   color: var(--dark-color);
   width: 85%;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   line-height: 1.4;
 
   @media (max-width: 768px) {
-    font-size: 18px;
+    font-size: 17px;
   }
 `
 
 export const LoginH3 = styled.h3`
-  font-size: 16px;
+  font-size: 15px;
   text-align: center;
   font-weight: 500;
   width: 80%;
   color: #555;
-  margin-top: 8px;
+  margin-top: 6px;
 
   @media (max-width: 768px) {
-    font-size: 15px;
+    font-size: 14px;
   }
 `
 
 export const Text = styled.p`
   width: 85%;
   color: #666;
-  font-size: 15px;
+  font-size: 14px;
   text-align: center;
-  padding: 30px 0;
-  line-height: 1.6;
+  padding: 20px 0;
+  line-height: 1.5;
 
   @media (max-width: 768px) {
-    font-size: 14px;
-    padding: 25px 0;
+    font-size: 13px;
+    padding: 18px 0;
   }
 `
 
@@ -248,9 +248,9 @@ export const LoginButton = styled.button<{ $isDev?: boolean }>`
 `
 
 export const Divider = styled.div`
-  margin: 15px 0;
+  margin: 12px 0;
   color: #999;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   position: relative;
   width: 60%;

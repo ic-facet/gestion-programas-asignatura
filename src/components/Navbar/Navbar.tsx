@@ -46,22 +46,23 @@ export default function Navbar({
     setIsSidebarOpen(false)
   }
 
+  // No renderizar el navbar si el usuario no está autenticado
+  if (!auth.isLoggedIn) {
+    return null
+  }
+
   return (
     <NavbarWrapper $isOpen={isSidebarOpen}>
       {isSidebarOpen && <ContentOverlay $isOpen={isSidebarOpen} />}
-      {auth.isLoggedIn && (
-        <BurgerButton
-          $isOpen={isSidebarOpen}
-          onClick={(event) => handleOpenSidebar(event)}
-        >
-          <i className="fas fa-bars"></i>
-        </BurgerButton>
-      )}
-      {auth.isLoggedIn && (
-        <SidebarContainer $isOpen={isSidebarOpen} ref={sidebarRef}>
-          <Sidebar onLinkClick={onLinkClick} />
-        </SidebarContainer>
-      )}
+      <BurgerButton
+        $isOpen={isSidebarOpen}
+        onClick={(event) => handleOpenSidebar(event)}
+      >
+        <i className="fas fa-bars"></i>
+      </BurgerButton>
+      <SidebarContainer $isOpen={isSidebarOpen} ref={sidebarRef}>
+        <Sidebar onLinkClick={onLinkClick} />
+      </SidebarContainer>
     </NavbarWrapper>
   )
 }

@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-export const MainContentContainer = styled.div`
-  padding-top: 50px;
+interface MainContentContainerProps {
+  $hasNavbar?: boolean
+}
+
+export const MainContentContainer = styled.div<MainContentContainerProps>`
+  padding-top: ${props => props.$hasNavbar ? '50px' : '0'};
   min-height: 100vh;
 `
