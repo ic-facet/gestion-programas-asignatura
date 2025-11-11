@@ -8,7 +8,7 @@ from backend.services import ServicioAnioAcademico
 class FormAnioAcademico(forms.ModelForm):
     class Meta:
         model = AnioAcademico
-        fields = ["fecha_inicio", "fecha_fin"]
+        fields = ["nombre", "fecha_inicio", "fecha_fin"]
 
     def clean(self) -> Dict[str, Any]:
         datos_validados = super().clean()
