@@ -34,6 +34,8 @@ class ChangePasswordForm(AdminPasswordChangeForm):
 
 class RolInline(TabularInline):
     model = Rol
+    fields = ["rol", "carrera", "asignatura", "cargo", "dedicacion", "fecha_inicio", "fecha_fin"]
+    autocomplete_fields = ["carrera", "asignatura"]
 
 
 class UserAdmin(admin.UserAdmin):
