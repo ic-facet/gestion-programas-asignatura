@@ -10,7 +10,7 @@ class AdminActividadReservada(admin.ModelAdmin):
     list_display = ["descripcion", "estandar"]
     list_display_links = ["descripcion"]
     search_fields = ["descripcion", "estandar__nombre"]
-    list_filter = ["estandar"]
+    list_filter = ["estandar", "estandar__carrera"]
     ordering = ["estandar", "descripcion"]
     list_per_page = 50
     autocomplete_fields = ["estandar"]
