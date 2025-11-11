@@ -32,7 +32,8 @@ class Rol(models.Model):
         Asignatura, on_delete=models.SET_NULL, null=True, blank=True
     )
     rol = models.CharField(max_length=2, choices=Roles.choices)
-    dedicacion = models.CharField(max_length=2, choices=Dedicaciones.choices)
+    cargo = models.CharField(max_length=255, blank=True, null=True)
+    dedicacion = models.CharField(max_length=2, choices=Dedicaciones.choices, blank=True, null=True)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField(null=True, blank=True)
 

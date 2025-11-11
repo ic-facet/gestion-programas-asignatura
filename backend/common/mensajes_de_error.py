@@ -103,6 +103,7 @@ MENSAJE_CORRELATIVA_INVALIDA = "El objeto de correlativa recibido es invalido."
 
 # Mensajes relacionados a semestres y anios lectivos
 MENSAJE_NO_PUEDEN_HABER_VARIOS_SEMESTRES_CON_LA_MISMA_FECHA = "No se puede definir un semestre que este activo al mismo momento que otro. Verifique las fechas."
+MENSAJE_SUPERPOSICION_SEMESTRES_EXCEDE_30_DIAS = "La superposición entre semestres no puede exceder los 30 días."
 MENSAJE_NO_PUEDEN_HABER_VARIOS_ANIOS_ACADEMICOS_CON_LA_MISMA_FECHA = "No se puede definir un año académico que este activo al mismo momento que otro. Verifique las fechas."
 MENSAJE_NO_HAY_SEMESTRE_ACTIVO = "No hay un semestre activo."
 MENSAJE_NO_HAY_SEMESTRES_ANTERIORES = "No hay semestres anteriores."

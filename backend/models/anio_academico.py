@@ -5,6 +5,7 @@ from backend.common.funciones_fecha import obtener_fecha_actual
 
 
 class AnioAcademico(models.Model):
+    nombre = models.CharField(max_length=255, blank=True, null=True)
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
 
@@ -25,4 +26,4 @@ class AnioAcademico(models.Model):
         return self.fecha_inicio <= hoy <= self.fecha_fin
 
     def __str__(self):
-        return str(self.fecha_inicio.year)
+        return self.nombre if self.nombre else str(self.fecha_inicio.year)
