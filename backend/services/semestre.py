@@ -6,6 +6,7 @@ from backend.common.funciones_fecha import obtener_fecha_y_hora_actual
 from backend.common.choices import Semestres
 from backend.common.mensajes_de_error import (
     MENSAJE_NO_PUEDEN_HABER_VARIOS_SEMESTRES_CON_LA_MISMA_FECHA,
+    MENSAJE_SUPERPOSICION_SEMESTRES_EXCEDE_30_DIAS,
     MENSAJE_FECHAS_INCORRECTAS,
     MENSAJE_NO_HAY_SEMESTRE_ACTIVO,
     MENSAJE_NO_HAY_SEMESTRES_FUTUROS,
@@ -40,13 +41,20 @@ class ServicioSemestre:
         if instance is not None:
             semestres_en_la_fecha = semestres_en_la_fecha.exclude(id=instance.id)
 
-        if bool(semestres_en_la_fecha):
-            raise ValidationError(
-                {
-                    "fecha_inicio": MENSAJE_NO_PUEDEN_HABER_VARIOS_SEMESTRES_CON_LA_MISMA_FECHA,
-                    "fecha_fin": MENSAJE_NO_PUEDEN_HABER_VARIOS_SEMESTRES_CON_LA_MISMA_FECHA,
-                }
-            )
+        # Validar que la superposición no exceda los 30 días
+        for semestre in semestres_en_la_fecha:
+            # Calcular días de superposición
+            inicio_superposicion = max(fecha_inicio, semestre.fecha_inicio)
+            fin_superposicion = min(fecha_fin, semestre.fecha_fin)
+            dias_superposicion = (fin_superposicion - inicio_superposicion).days + 1
+
+            if dias_superposicion > 30:
+                raise ValidationError(
+                    {
+                        "fecha_inicio": MENSAJE_SUPERPOSICION_SEMESTRES_EXCEDE_30_DIAS,
+                        "fecha_fin": MENSAJE_SUPERPOSICION_SEMESTRES_EXCEDE_30_DIAS,
+                    }
+                )
 
         if (
             fecha_inicio < anio_academico.fecha_inicio
