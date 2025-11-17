@@ -1,6 +1,6 @@
-import '../Historial.css'
 import { FiltrosType, selectedFiltrosType } from 'types'
 import { Dropdown } from '../../../components'
+import { FilterSection, FilterTitle, FilterGrid, FilterButton } from '../HistorialStyled'
 
 interface FiltrosProps {
   filtros: FiltrosType
@@ -29,9 +29,9 @@ export default function Filtros({
   }
 
   return (
-    <section id="filter-components-container">
-      <h1 className="titulo-filtro">Filtros</h1>
-      <section id="filter-container">
+    <FilterSection>
+      <FilterTitle>Filtros</FilterTitle>
+      <FilterGrid>
         {filtros.map((filtroGroup) => {
           return (
             <Dropdown
@@ -46,13 +46,10 @@ export default function Filtros({
             />
           )
         })}
-      </section>
-      <button
-        className="boton-filtrar"
-        onClick={() => searchHistorialProgramas(selectedFiltros)}
-      >
+      </FilterGrid>
+      <FilterButton onClick={() => searchHistorialProgramas(selectedFiltros)}>
         Filtrar
-      </button>
-    </section>
+      </FilterButton>
+    </FilterSection>
   )
 }

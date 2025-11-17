@@ -135,6 +135,13 @@ export const ActionIcon = styled.i`
   &:active {
     transform: scale(1.1);
   }
+
+  &.fa-file-excel {
+    color: #28a745;
+    &:hover {
+      color: #218838;
+    }
+  }
 `
 
 export const LoadingContainer = styled.div`

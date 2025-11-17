@@ -1,4 +1,4 @@
-import './Button.css'
+import { StyledButton } from './ButtonStyled'
 
 interface ButtonProps {
   text: string
@@ -6,26 +6,28 @@ interface ButtonProps {
   link?: string
   cssClass?: string
   disabled?: boolean
+  variant?: 'primary' | 'secondary' | 'danger' | 'success'
+  size?: 'small' | 'medium' | 'large'
 }
 
 export default function Button({
   text,
   onClick,
   cssClass,
-  disabled
+  disabled,
+  variant = 'primary',
+  size = 'medium'
 }: ButtonProps) {
-  const buttonClass = `button ${cssClass || ''}`
-
   return (
-    <>
-      <button
-        type="button"
-        onClick={onClick}
-        className={buttonClass}
-        disabled={disabled}
-      >
-        {text}
-      </button>
-    </>
+    <StyledButton
+      type="button"
+      onClick={onClick}
+      className={cssClass}
+      disabled={disabled}
+      $variant={variant}
+      $size={size}
+    >
+      {text}
+    </StyledButton>
   )
 }
