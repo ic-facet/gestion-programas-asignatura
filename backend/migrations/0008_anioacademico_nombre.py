@@ -3,6 +3,38 @@
 from django.db import migrations, models
 
 
+def add_column_if_not_exists(apps, schema_editor):
+    """Add columns only if they don't already exist."""
+    connection = schema_editor.connection
+
+    # Check and add dedicacion to backend_rol
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT column_name FROM information_schema.columns
+            WHERE table_name = 'backend_rol' AND column_name = 'dedicacion'
+        """)
+        if not cursor.fetchone():
+            cursor.execute('ALTER TABLE "backend_rol" ADD COLUMN "dedicacion" varchar(2) NULL')
+
+    # Check and add cargo to backend_rol
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT column_name FROM information_schema.columns
+            WHERE table_name = 'backend_rol' AND column_name = 'cargo'
+        """)
+        if not cursor.fetchone():
+            cursor.execute('ALTER TABLE "backend_rol" ADD COLUMN "cargo" varchar(255) NULL')
+
+    # Check and add nombre to backend_anioacademico
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT column_name FROM information_schema.columns
+            WHERE table_name = 'backend_anioacademico' AND column_name = 'nombre'
+        """)
+        if not cursor.fetchone():
+            cursor.execute('ALTER TABLE "backend_anioacademico" ADD COLUMN "nombre" varchar(255) NULL')
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -10,19 +42,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='anioacademico',
-            name='nombre',
-            field=models.CharField(blank=True, max_length=255, null=True),
-        ),
-        migrations.AddField(
-            model_name='rol',
-            name='cargo',
-            field=models.CharField(blank=True, max_length=255, null=True),
-        ),
-        migrations.AddField(
-            model_name='rol',
-            name='dedicacion',
-            field=models.CharField(blank=True, choices=[('N', 'No exclusiva'), ('E', 'Exclusiva')], max_length=2, null=True),
-        ),
+        migrations.RunPython(add_column_if_not_exists, migrations.RunPython.noop),
     ]
