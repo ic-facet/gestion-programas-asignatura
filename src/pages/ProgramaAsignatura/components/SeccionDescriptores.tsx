@@ -209,11 +209,12 @@ export default function SeccionDescriptores({
                   disabled={modoLectura}
                 />
                 {index === descriptores.resultadosAprendizaje.length - 1 && (
-                  <div className="sumar-text-area">
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Button
                       text="+"
                       onClick={aniadirResultadoAprendizaje}
                       disabled={modoLectura}
+                      size="small"
                     ></Button>
                   </div>
                 )}

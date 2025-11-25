@@ -1,7 +1,7 @@
 import ReactDom from 'react-dom'
-import './Modal.css'
 import Button from '../ui/Button'
 import { ModalProps } from '../../constants/constants'
+import { Overlay, ModalContainer, ModalContent, ModalFooter } from './ModalStyled'
 
 export default function Modal({
   open,
@@ -16,16 +16,19 @@ export default function Modal({
 
   return ReactDom.createPortal(
     <>
-      <div className="overlay" />
-      <div className={`modal ${className}`}>
+      <Overlay onClick={onClose} />
+      <ModalContainer className={className}>
         <h2>{modalTitle}</h2>
-        {children}
-        <Button
-          text={botonGuardado ? 'Guardar' : 'X'}
-          onClick={onClose}
-          cssClass="close-modal-button"
-        />
-      </div>
+        <ModalContent>{children}</ModalContent>
+        <ModalFooter>
+          <Button
+            text={botonGuardado ? 'Guardar' : 'Cerrar'}
+            onClick={onClose}
+            variant={botonGuardado ? 'success' : 'secondary'}
+            size="small"
+          />
+        </ModalFooter>
+      </ModalContainer>
     </>,
     portalRoot
   )

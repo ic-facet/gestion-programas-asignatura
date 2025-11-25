@@ -1,7 +1,14 @@
 import { Spinner } from '../../../components'
-import '../../../components/Table/Table.css'
 import { MODOS_PROGRAMA_ASIGNATURA } from '../../../constants/constants'
 import { tableRowProgramasVigentes } from 'props/props'
+import {
+  TableWrapper,
+  StyledTable,
+  ActionIcon,
+  LoadingContainer,
+  EmptyRow,
+  ErrorRow
+} from '../HistorialStyled'
 
 interface TableProps {
   tableColumns: string[]
@@ -28,24 +35,17 @@ export default function TableHistorial({
   isLoading,
   error
 }: TableProps) {
-  // Si acciones no es null entonces renderizamos esa columna
+  if (isLoading) {
+    return (
+      <LoadingContainer>
+        <Spinner />
+      </LoadingContainer>
+    )
+  }
 
-  return isLoading ? (
-    <div
-      style={{
-        width: '300px',
-        height: '300px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: '0 auto'
-      }}
-    >
-      <Spinner />
-    </div>
-  ) : (
-    <article>
-      <table className="content-table">
+  return (
+    <TableWrapper>
+      <StyledTable>
         <thead>
           <tr>
             {tableColumns.map((column) => (
@@ -56,56 +56,58 @@ export default function TableHistorial({
 
         <tbody>
           {tableData && tableData.length > 0 ? (
-            <>
-              {tableData.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.asignatura.nombre}</td>
-                  <td id="column-acciones">
-                    {item.acciones_posibles ? (
-                      <>
-                        {item.acciones_posibles.ver_programa ? (
-                          <i
-                            onClick={() =>
-                              verPrograma(
-                                item.id,
-                                MODOS_PROGRAMA_ASIGNATURA.VER as ModosProgramaAsignatura
-                              )
-                            }
-                            className="fas fa-eye"
-                            title="Ver programa"
-                            style={{ cursor: 'pointer' }}
-                          ></i>
-                        ) : null}
-                        {item.acciones_posibles.imprimir ? (
-                          <i
-                            onClick={() =>
-                              imprimir(
-                                item.id,
-                                MODOS_PROGRAMA_ASIGNATURA.IMPRIMIR as ModosProgramaAsignatura
-                              )
-                            }
-                            className="fas fa-print"
-                            style={{ cursor: 'pointer' }}
-                            title="Imprimir"
-                          ></i>
-                        ) : null}
-                      </>
-                    ) : null}
-                  </td>
-                </tr>
-              ))}
-            </>
+            tableData.map((item) => (
+              <tr key={item.id}>
+                <td>{item.asignatura.nombre}</td>
+                <td id="column-acciones">
+                  {item.acciones_posibles ? (
+                    <>
+                      {item.acciones_posibles.ver_programa && (
+                        <ActionIcon
+                          onClick={() =>
+                            verPrograma(
+                              item.id,
+                              MODOS_PROGRAMA_ASIGNATURA.VER as ModosProgramaAsignatura
+                            )
+                          }
+                          className="fas fa-eye"
+                          title="Ver programa"
+                        />
+                      )}
+                      {item.acciones_posibles.imprimir && (
+                        <ActionIcon
+                          onClick={() =>
+                            imprimir(
+                              item.id,
+                              MODOS_PROGRAMA_ASIGNATURA.IMPRIMIR as ModosProgramaAsignatura
+                            )
+                          }
+                          className="fas fa-print"
+                          title="Imprimir"
+                        />
+                      )}
+                    </>
+                  ) : null}
+                </td>
+              </tr>
+            ))
           ) : error ? (
-            <tr>
-              <td>Ocurrió un error al momento de realizar la búsqueda</td>
-            </tr>
+            <ErrorRow>
+              <td colSpan={tableColumns.length}>
+                <i className="fas fa-exclamation-triangle" />
+                Ocurrió un error al momento de realizar la búsqueda
+              </td>
+            </ErrorRow>
           ) : (
-            <tr>
-              <td>No hay datos que coincidan con la búsqueda</td>
-            </tr>
+            <EmptyRow>
+              <td colSpan={tableColumns.length}>
+                <i className="fas fa-search" />
+                No hay datos que coincidan con la búsqueda
+              </td>
+            </EmptyRow>
           )}
         </tbody>
-      </table>
-    </article>
+      </StyledTable>
+    </TableWrapper>
   )
 }

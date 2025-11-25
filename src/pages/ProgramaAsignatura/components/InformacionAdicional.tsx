@@ -47,7 +47,7 @@ export default function InformacionAdicional({
         {CAMPOS_INFORMACION_ADICIONAL.map((config) => (
           <TextArea
             key={config.id}
-            modoLectura={modoLectura}
+            modoLectura={modoLectura || config.name === 'contenidos'}
             label={config.label}
             name={config.name}
             id={config.name}
