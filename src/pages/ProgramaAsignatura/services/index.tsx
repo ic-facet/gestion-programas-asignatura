@@ -24,17 +24,20 @@ const parserProgramaAsignatura = (
       anioAcademico: programa.informacion_general.anio_academico
     },
     cargaHoraria: {
-      practicaDistancia: programa.carga_horaria.practica_distancia,
-      teoriaDistancia: programa.carga_horaria.teoria_distancia,
-      laboratorioDistancia: programa.carga_horaria.laboratorio_distancia,
-      teoricoPracticoDistancia:
-        programa.carga_horaria.teorico_practico_distancia,
-      practicaPresencial: programa.carga_horaria.practica_presencial,
-      teoriaPresencial: programa.carga_horaria.teoria_presencial,
-      laboratorioPresencial: programa.carga_horaria.laboratorio_presencial,
-      teoricoPracticoPresencial:
-        programa.carga_horaria.teorico_practico_presencial,
-      semanasDictado: programa.carga_horaria.semanas_dictado
+      totalPracticaRemoto: programa.carga_horaria.total_practica_remoto,
+      totalTeoriaRemoto: programa.carga_horaria.total_teoria_remoto,
+      totalLabRemoto: programa.carga_horaria.total_lab_remoto,
+      totalTeoricoPracticoRemoto:
+        programa.carga_horaria.total_teorico_practico_remoto,
+      totalPracticaPresencial: programa.carga_horaria.total_practica_presencial,
+      totalTeoriaPresencial: programa.carga_horaria.total_teoria_presencial,
+      totalLabPresencial: programa.carga_horaria.total_lab_presencial,
+      totalTeoricoPracticoPresencial:
+        programa.carga_horaria.total_teorico_practico_presencial,
+      semanasDictado: programa.carga_horaria.semanas_dictado,
+      horasEvaluacion: programa.carga_horaria.horas_evaluacion,
+      cargaRtf: programa.carga_horaria.carga_rtf,
+      promedioHorasSemanales: programa.carga_horaria.promedio_horas_semanales
     },
     descriptores: {
       resultadosAprendizaje: programa.descriptores.resultados_de_aprendizaje,
@@ -75,16 +78,19 @@ const parserNuevoProgramaAsignatura = (
       anioAcademico: datos.informacion_general.anio_academico
     },
     cargaHoraria: {
-      practicaDistancia: datos.carga_horaria.practica_distancia,
-      teoriaDistancia: datos.carga_horaria.teoria_distancia,
-      laboratorioDistancia: datos.carga_horaria.laboratorio_distancia,
-      teoricoPracticoDistancia: datos.carga_horaria.teorico_practico_distancia,
-      practicaPresencial: datos.carga_horaria.practica_presencial,
-      teoriaPresencial: datos.carga_horaria.teoria_presencial,
-      laboratorioPresencial: datos.carga_horaria.laboratorio_presencial,
-      teoricoPracticoPresencial:
-        datos.carga_horaria.teorico_practico_presencial,
-      semanasDictado: datos.carga_horaria.semanas_dictado
+      totalPracticaRemoto: datos.carga_horaria.total_practica_remoto,
+      totalTeoriaRemoto: datos.carga_horaria.total_teoria_remoto,
+      totalLabRemoto: datos.carga_horaria.total_lab_remoto,
+      totalTeoricoPracticoRemoto: datos.carga_horaria.total_teorico_practico_remoto,
+      totalPracticaPresencial: datos.carga_horaria.total_practica_presencial,
+      totalTeoriaPresencial: datos.carga_horaria.total_teoria_presencial,
+      totalLabPresencial: datos.carga_horaria.total_lab_presencial,
+      totalTeoricoPracticoPresencial:
+        datos.carga_horaria.total_teorico_practico_presencial,
+      semanasDictado: datos.carga_horaria.semanas_dictado,
+      horasEvaluacion: datos.carga_horaria.horas_evaluacion,
+      cargaRtf: datos.carga_horaria.carga_rtf,
+      promedioHorasSemanales: datos.carga_horaria.promedio_horas_semanales
     },
     ejesTransversales: datos.ejes_transversales,
     actividadesReservadas: datos.actividades_reservadas,
