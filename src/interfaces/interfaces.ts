@@ -7,14 +7,17 @@ import {
 export interface CargaHoraria {
   // cargaHorariaTotal: number
   semanasDictado: number
-  teoriaPresencial: number
-  practicaPresencial: number
-  teoricoPracticoPresencial: number
-  laboratorioPresencial: number
-  teoriaDistancia: number
-  practicaDistancia: number
-  teoricoPracticoDistancia: number
-  laboratorioDistancia: number
+  totalTeoriaPresencial: number
+  totalPracticaPresencial: number
+  totalTeoricoPracticoPresencial: number
+  totalLabPresencial: number
+  totalTeoriaRemoto: number
+  totalPracticaRemoto: number
+  totalTeoricoPracticoRemoto: number
+  totalLabRemoto: number
+  horasEvaluacion: number
+  cargaRtf: number
+  promedioHorasSemanales: number
   // Index signature
   [key: string]: string | number
 }
@@ -109,14 +112,16 @@ export interface MatrizErroresInterface {
 
 export interface CargaHorariaErrores {
   semanasDictado: string
-  teoriaPresencial: string
-  practicaPresencial: string
-  teoricoPracticoPresencial: string
-  laboratorioPresencial: string
-  teoriaDistancia: string
-  practicaDistancia: string
-  teoricoPracticoDistancia: string
-  laboratorioDistancia: string
+  totalTeoriaPresencial: string
+  totalPracticaPresencial: string
+  totalTeoricoPracticoPresencial: string
+  totalLabPresencial: string
+  totalTeoriaRemoto: string
+  totalPracticaRemoto: string
+  totalTeoricoPracticoRemoto: string
+  totalLabRemoto: string
+  horasEvaluacion: string
+  cargaRtf: string
   // Index signature
   [key: string]: string
 }
@@ -184,14 +189,17 @@ export interface ProgramaAsignaturaAPIBody {
   }
   carga_horaria: {
     semanas_dictado: number
-    teoria_presencial: number
-    practica_presencial: number
-    teorico_practico_presencial: number
-    laboratorio_presencial: number
-    teoria_distancia: number
-    practica_distancia: number
-    teorico_practico_distancia: number
-    laboratorio_distancia: number
+    total_teoria_presencial: number
+    total_practica_presencial: number
+    total_teorico_practico_presencial: number
+    total_lab_presencial: number
+    total_teoria_remoto: number
+    total_practica_remoto: number
+    total_teorico_practico_remoto: number
+    total_lab_remoto: number
+    horas_evaluacion: number
+    carga_rtf: number
+    promedio_horas_semanales: number
   }
   descriptores: {
     resultados_de_aprendizaje: string[]
@@ -238,14 +246,17 @@ export interface NuevoProgramaAPIBody {
   }
   carga_horaria: {
     semanas_dictado: number
-    teoria_presencial: number
-    practica_presencial: number
-    teorico_practico_presencial: number
-    laboratorio_presencial: number
-    teoria_distancia: number
-    practica_distancia: number
-    teorico_practico_distancia: number
-    laboratorio_distancia: number
+    total_teoria_presencial: number
+    total_practica_presencial: number
+    total_teorico_practico_presencial: number
+    total_lab_presencial: number
+    total_teoria_remoto: number
+    total_practica_remoto: number
+    total_teorico_practico_remoto: number
+    total_lab_remoto: number
+    horas_evaluacion: number
+    carga_rtf: number
+    promedio_horas_semanales: number
   }
   ejes_transversales: {
     id: number

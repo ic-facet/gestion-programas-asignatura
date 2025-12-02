@@ -85,6 +85,15 @@ class Asignatura(models.Model):
         """
         return self.horas_totales_clases
 
+    @property
+    def promedio_horas_semanales(self) -> float:
+        """
+        Promedio de horas de clases semanales
+        """
+        if self.semanas_dictado == 0:
+            return 0.0
+        return round(self.horas_totales_clases / self.semanas_dictado, 2)
+
     def __str__(self):
         return f"{self.codigo} - {self.denominacion}"
 

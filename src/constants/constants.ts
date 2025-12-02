@@ -69,14 +69,17 @@ export const NUEVO_PROGRAMA_ASIGNATURA: ProgramaAsignaturaInterface = {
   },
   cargaHoraria: {
     semanasDictado: 0,
-    teoriaPresencial: 0,
-    practicaPresencial: 0,
-    teoricoPracticoPresencial: 0,
-    laboratorioPresencial: 0,
-    teoriaDistancia: 0,
-    practicaDistancia: 0,
-    teoricoPracticoDistancia: 0,
-    laboratorioDistancia: 0
+    totalTeoriaPresencial: 0,
+    totalPracticaPresencial: 0,
+    totalTeoricoPracticoPresencial: 0,
+    totalLabPresencial: 0,
+    totalTeoriaRemoto: 0,
+    totalPracticaRemoto: 0,
+    totalTeoricoPracticoRemoto: 0,
+    totalLabRemoto: 0,
+    horasEvaluacion: 0,
+    cargaRtf: 0,
+    promedioHorasSemanales: 0
   },
   descriptores: {
     resultadosAprendizaje: [''],
@@ -140,42 +143,57 @@ export const CAMPOS_CARGA_HORARIA: CampoCargaHorariaType = [
   {
     label: 'Teoria presencial',
     id: 'teoria-presencial',
-    name: 'teoria_presencial'
+    name: 'total_teoria_presencial'
   },
   {
     label: 'Practica presencial',
     id: 'practica-presencial',
-    name: 'practica_presencial'
+    name: 'total_practica_presencial'
   },
   {
     label: 'Teorico-practico presencial',
     id: 'teorico-practico-presencial',
-    name: 'teorico_practico_presencial'
+    name: 'total_teorico_practico_presencial'
   },
   {
     label: 'Laboratorios presenciales',
     id: 'laboratorios-presenciales',
-    name: 'laboratorios_presenciales'
+    name: 'total_lab_presencial'
   },
   {
-    label: 'Teoria a distancia',
-    id: 'teoria-distancia',
-    name: 'teoria_distancia'
+    label: 'Teoria remoto',
+    id: 'teoria-remoto',
+    name: 'total_teoria_remoto'
   },
   {
-    label: 'Practica a distancia',
-    id: 'practica-distancia',
-    name: 'practica_distancia'
+    label: 'Practica remoto',
+    id: 'practica-remoto',
+    name: 'total_practica_remoto'
   },
   {
-    label: 'Teorico-practico a distancia',
-    id: 'teorico-practico-distancia',
-    name: 'teorico_practico_distancia'
+    label: 'Teorico-practico remoto',
+    id: 'teorico-practico-remoto',
+    name: 'total_teorico_practico_remoto'
   },
   {
-    label: 'Laboratorio a distancia',
-    id: 'laboratorio-distancia',
-    name: 'laboratorio_distancia'
+    label: 'Laboratorio remoto',
+    id: 'laboratorio-remoto',
+    name: 'total_lab_remoto'
+  },
+  {
+    label: 'Horas de evaluacion',
+    id: 'horas-evaluacion',
+    name: 'horas_evaluacion'
+  },
+  {
+    label: 'Carga RTF',
+    id: 'carga-rtf',
+    name: 'carga_rtf'
+  },
+  {
+    label: 'Promedio horas semanales',
+    id: 'promedio-horas-semanales',
+    name: 'promedio_horas_semanales'
   }
 ]
 
