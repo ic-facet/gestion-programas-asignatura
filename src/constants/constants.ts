@@ -270,11 +270,13 @@ export const enum ROLES {
 export interface SidebarSection {
   id: number
   name: string
+  icon?: string
   sections: {
     id: number
     name: string
     url: string
     permisos: ROLES[] | null
+    icon?: string
   }[]
 }
 
@@ -293,36 +295,42 @@ export const SIDEBAR_SECTIONS: SidebarSection[] = [
   {
     id: 1,
     name: 'Informes',
+    icon: 'fas fa-chart-bar',
     sections: [
       {
         id: 1,
         name: 'Matriz de Tributación',
         url: RUTAS_PAGINAS.MATRIZ,
-        permisos: [ROLES.DIRECTOR, ROLES.SECRETARIO]
+        permisos: [ROLES.DIRECTOR, ROLES.SECRETARIO],
+        icon: 'fas fa-table'
       }
     ]
   },
   {
     id: 2,
     name: 'Programas de Asignatura',
+    icon: 'fas fa-book-open',
     sections: [
       {
         id: 4,
         name: 'Programas vigentes',
         url: RUTAS_PAGINAS.PROGRAMAS_VIGENTES,
-        permisos: null
+        permisos: null,
+        icon: 'fas fa-check-circle'
       },
       {
         id: 6,
         name: 'Tareas Pendientes',
         url: RUTAS_PAGINAS.TAREAS_PENDIENTES,
-        permisos: [ROLES.DOCENTE, ROLES.DIRECTOR]
+        permisos: [ROLES.DOCENTE, ROLES.DIRECTOR],
+        icon: 'fas fa-tasks'
       },
       {
         id: 7,
         name: 'Historial',
         url: RUTAS_PAGINAS.HISTORIAL,
-        permisos: null
+        permisos: null,
+        icon: 'fas fa-history'
       }
     ]
   }

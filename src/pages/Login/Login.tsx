@@ -17,7 +17,8 @@ import {
   LoginH3,
   Text,
   LoginButton,
-  Divider
+  Divider,
+  BackButton
 } from './LoginStyled'
 
 const BASE_FRONTEND_URL = import.meta.env.VITE_BASE_FRONTEND_URL
@@ -59,8 +60,17 @@ const Login: React.FC = () => {
     }
   }, [navigate, getAuthUser])
 
+  const handleGoBack = useCallback(() => {
+    navigate(RUTAS_PAGINAS.INICIO)
+  }, [navigate])
+
   return (
     <Container>
+      <BackButton onClick={handleGoBack} aria-label="Volver al inicio">
+        <i className="fas fa-arrow-left" />
+        <span>Volver al inicio</span>
+      </BackButton>
+
       <Card>
         <ProfileImage>
           <i className="fas fa-user" />

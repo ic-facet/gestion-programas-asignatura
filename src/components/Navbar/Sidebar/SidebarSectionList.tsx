@@ -12,7 +12,8 @@ import {
   Title,
   SubsectionList,
   SubsectionItem,
-  BotonSeccion
+  BotonSeccion,
+  SectionIcon
 } from '../NavbarStyled'
 
 interface SectionProps {
@@ -47,6 +48,7 @@ const SidebarSectionList: React.FC<SectionProps> = ({ onLinkClick }) => {
         return {
           id: seccion.id,
           name: seccion.name,
+          icon: seccion.icon,
           sections: subseccionesFiltradas
         }
       }
@@ -66,6 +68,7 @@ const SidebarSectionList: React.FC<SectionProps> = ({ onLinkClick }) => {
         return (
           <SectionContainer key={section.id}>
             <SectionTitle>
+              {section.icon && <SectionIcon className={section.icon} />}
               <Title>{section.name}</Title>
             </SectionTitle>
             <SubsectionList>
@@ -85,6 +88,7 @@ const SidebarSectionList: React.FC<SectionProps> = ({ onLinkClick }) => {
                       <BotonSeccion
                         onClick={() => handleLinkRedirect(subsection.url)}
                       >
+                        {subsection.icon && <i className={subsection.icon} />}
                         {subsection.name}
                       </BotonSeccion>
                     </SubsectionItem>

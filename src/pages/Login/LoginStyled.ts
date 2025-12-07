@@ -274,3 +274,59 @@ export const Divider = styled.div`
     right: 0;
   }
 `
+
+export const BackButton = styled.button`
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 12px;
+  color: var(--primary-color);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+
+  i {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateX(-4px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+    background: white;
+
+    i {
+      transform: translateX(-3px);
+    }
+  }
+
+  &:active {
+    transform: translateX(-2px) scale(0.98);
+  }
+
+  @media (max-width: 768px) {
+    top: 16px;
+    left: 16px;
+    padding: 10px 16px;
+    font-size: 13px;
+
+    span {
+      display: none;
+    }
+
+    i {
+      font-size: 18px;
+    }
+  }
+`
