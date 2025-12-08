@@ -2,7 +2,11 @@ import {
   NavbarWrapper,
   SidebarContainer,
   BurgerButton,
-  ContentOverlay
+  ContentOverlay,
+  NavbarTitle,
+  NavbarUserInfo,
+  NavbarUserName,
+  NavbarUserRole
 } from './NavbarStyled'
 import Sidebar from './Sidebar/Sidebar'
 import { useRef, useEffect } from 'react'
@@ -60,6 +64,19 @@ export default function Navbar({
       >
         <i className="fas fa-bars"></i>
       </BurgerButton>
+      <NavbarTitle>Sistema de Gestión de Programas</NavbarTitle>
+      <NavbarUserInfo>
+        <NavbarUserName>
+          <i className="fas fa-user"></i>
+          {auth.userFirstName} {auth.userLastName}
+        </NavbarUserName>
+        <NavbarUserRole>
+          {auth.userRoles.es_administrador ? 'Administrador' :
+           auth.userRoles.es_director_de_carrera ? 'Director' :
+           auth.userRoles.es_secretario_academico ? 'Secretario' :
+           auth.userRoles.es_docente ? 'Docente' : 'Usuario'}
+        </NavbarUserRole>
+      </NavbarUserInfo>
       <SidebarContainer $isOpen={isSidebarOpen} ref={sidebarRef}>
         <Sidebar onLinkClick={onLinkClick} />
       </SidebarContainer>

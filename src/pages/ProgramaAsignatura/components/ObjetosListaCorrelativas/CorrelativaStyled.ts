@@ -1,25 +1,43 @@
-import styled from 'styled-components'
+import React from 'react'
 
-export const CorrelativaContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding: 5px 0px;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  background-color: transparent;
-  border-bottom: 1px solid var(--primary-color);
-`
+export const correlativaStyles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'row' as const,
+    padding: '16px 20px',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    borderRadius: '12px',
+    border: '1px solid #e2e8f0',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+    boxSizing: 'border-box' as const,
+    gap: '16px',
+    transition: 'all 0.2s ease'
+  } as React.CSSProperties,
+  deleteButton: {
+    backgroundColor: '#ef4444',
+    color: 'white',
+    cursor: 'pointer',
+    border: 'none',
+    padding: '10px 14px',
+    borderRadius: '8px',
+    fontSize: '14px',
+    transition: 'all 0.2s ease',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: '40px'
+  } as React.CSSProperties,
+  infoContainer: {
+    flex: 1,
+    display: 'flex',
+    minWidth: 0
+  } as React.CSSProperties
+}
 
-export const BorrarCorrelativaButton = styled.button`
-  background-color: brown;
-  color: white;
-  cursor: pointer;
-  border: none;
-  padding: 5px 10px;
-`
-
-export const InfoContainer = styled.div`
-  width: 45%;
-  display: flex;
-`
+// Legacy exports for backward compatibility - these are now just style objects
+export const CorrelativaContainer = correlativaStyles.container
+export const BorrarCorrelativaButton = correlativaStyles.deleteButton
+export const InfoContainer = correlativaStyles.infoContainer

@@ -3,11 +3,7 @@ import {
   TIPO_CORRELATIVA,
   LISTADO_SELECCION_TIPOS_CORRELATIVA
 } from '../../../../constants/constants'
-import {
-  CorrelativaContainer,
-  BorrarCorrelativaButton,
-  InfoContainer
-} from './CorrelativaStyled'
+import { correlativaStyles } from './CorrelativaStyled'
 import { Input, Dropdown } from '../../../../components'
 
 interface CorrelativaAsignaturasInterface {
@@ -28,8 +24,8 @@ const CorrelativaCantidad: React.FC<CorrelativaAsignaturasInterface> = ({
   modoLectura
 }) => {
   return (
-    <CorrelativaContainer>
-      <InfoContainer>
+    <div style={correlativaStyles.container}>
+      <div style={correlativaStyles.infoContainer}>
         <Dropdown
           name="tipoCorrelativa"
           value={tipo.valueOf()}
@@ -39,8 +35,8 @@ const CorrelativaCantidad: React.FC<CorrelativaAsignaturasInterface> = ({
           onChange={enCambioTipoCorrelativa}
           modoLectura={modoLectura}
         />
-      </InfoContainer>
-      <InfoContainer>
+      </div>
+      <div style={correlativaStyles.infoContainer}>
         <Input
           id="cantidad"
           type="number"
@@ -51,13 +47,13 @@ const CorrelativaCantidad: React.FC<CorrelativaAsignaturasInterface> = ({
           onChange={enCambioCantidadAsignaturas}
           modoLectura={modoLectura}
         />
-      </InfoContainer>
+      </div>
       {!modoLectura && (
-        <BorrarCorrelativaButton onClick={enBorradoCorrelativa}>
+        <button style={correlativaStyles.deleteButton} onClick={enBorradoCorrelativa}>
           <i className="fas fa-solid fa-trash" />
-        </BorrarCorrelativaButton>
+        </button>
       )}
-    </CorrelativaContainer>
+    </div>
   )
 }
 

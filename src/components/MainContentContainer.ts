@@ -5,6 +5,6 @@ interface MainContentContainerProps {
 }
 
 export const MainContentContainer = styled.div<MainContentContainerProps>`
-  padding-top: ${props => props.$hasNavbar ? '50px' : '0'};
+  padding-top: ${props => props.$hasNavbar ? '80px' : '0'};
   min-height: 100vh;
 `

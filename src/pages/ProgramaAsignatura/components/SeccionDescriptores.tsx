@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
-  Formulario,
-  TituloSeccion,
   SeleccionConModal,
   Button,
   DoubleSelectionInput
@@ -15,11 +13,118 @@ import {
   MODOS_PROGRAMA_ASIGNATURA,
   DatosListaSeleccionInterface
 } from '../../../constants/constants'
-import {
-  InputOutsideContainer,
-  SeccionFormulario,
-  WholeWidthInputContainer
-} from './SeccionFormulario'
+
+const styles = {
+  sectionContainer: {
+    width: '90%',
+    maxWidth: '1200px',
+    marginBottom: '24px',
+    background: 'white',
+    borderRadius: '16px',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+    overflow: 'hidden'
+  } as React.CSSProperties,
+  sectionHeader: {
+    width: '100%',
+    background: 'linear-gradient(135deg, var(--primary-color) 0%, #1a4d6d 100%)',
+    padding: '18px 24px',
+    textAlign: 'center' as const,
+    position: 'relative' as const,
+    boxSizing: 'border-box' as const
+  } as React.CSSProperties,
+  sectionTitle: {
+    color: 'white',
+    fontSize: '16px',
+    margin: 0,
+    fontWeight: 600,
+    letterSpacing: '1.2px',
+    textTransform: 'uppercase' as const
+  } as React.CSSProperties,
+  contentSection: {
+    padding: '24px 32px 32px',
+    boxSizing: 'border-box' as const
+  } as React.CSSProperties,
+  cardsGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gap: '16px',
+    marginBottom: '24px'
+  } as React.CSSProperties,
+  descriptoresSection: {
+    marginTop: '8px'
+  } as React.CSSProperties,
+  resultadoTextArea: {
+    width: '100%',
+    padding: '14px 16px',
+    border: '2px solid #e2e8f0',
+    borderRadius: '10px',
+    fontSize: '14px',
+    lineHeight: 1.6,
+    fontFamily: 'inherit',
+    resize: 'vertical' as const,
+    minHeight: '80px',
+    transition: 'all 0.2s ease',
+    background: '#fafafa',
+    marginBottom: '12px',
+    boxSizing: 'border-box' as const,
+    outline: 'none'
+  } as React.CSSProperties,
+  textareaDisabled: {
+    background: '#f1f5f9',
+    color: '#64748b',
+    cursor: 'not-allowed'
+  } as React.CSSProperties,
+  radioGroupContainer: {
+    background: 'white',
+    borderRadius: '12px',
+    padding: '16px 20px',
+    marginBottom: '12px',
+    border: '1px solid #e2e8f0',
+    transition: 'all 0.2s ease'
+  } as React.CSSProperties,
+  radioGroupLabel: {
+    display: 'block',
+    fontSize: '14px',
+    fontWeight: 600,
+    color: '#374151',
+    marginBottom: '12px'
+  } as React.CSSProperties,
+  radioOptionsRow: {
+    display: 'flex',
+    flexWrap: 'wrap' as const,
+    gap: '8px'
+  } as React.CSSProperties,
+  radioOption: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    padding: '8px 14px',
+    borderRadius: '20px',
+    fontSize: '13px',
+    fontWeight: 500,
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+    background: '#f1f5f9',
+    color: '#64748b',
+    border: '2px solid transparent'
+  } as React.CSSProperties,
+  radioOptionChecked: {
+    background: 'linear-gradient(135deg, var(--primary-color) 0%, #1a4d6d 100%)',
+    color: 'white',
+    border: '2px solid var(--primary-color)'
+  } as React.CSSProperties,
+  radioOptionDisabled: {
+    cursor: 'not-allowed'
+  } as React.CSSProperties,
+  hiddenInput: {
+    display: 'none'
+  } as React.CSSProperties,
+  addButtonContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '8px'
+  } as React.CSSProperties
+}
 
 interface SeccionDescriptoresProps {
   programaAsignatura: ProgramaAsignaturaInterface
@@ -89,7 +194,6 @@ export default function SeccionDescriptores({
   }
 
   const resultadosAprendizajeCount = () => {
-    //Contar solo los resultados de aprendizaje que no sean string vacios
     const resultadosAprendizaje =
       programaAsignatura.descriptores.resultadosAprendizaje || []
 
@@ -110,7 +214,6 @@ export default function SeccionDescriptores({
     })
   }
 
-  // Al abrir el modal limpiamos los resultados de aprendizaje que son string vacios
   const abrirModalResultados = () => {
     const resultadosAprendizaje: string[] =
       descriptores.resultadosAprendizaje || []
@@ -150,7 +253,6 @@ export default function SeccionDescriptores({
   }
 
   const handleDescriptorChange = (id: number) => {
-    // Toggle the field seleccionado for the descriptor with the given id
     if (modoLectura) return
     const descriptores = [...programaAsignatura.descriptores.descriptores]
     const descriptor = descriptores.find((descriptor) => descriptor.id === id)
@@ -183,11 +285,19 @@ export default function SeccionDescriptores({
     })
   }
 
+  const getRadioStyle = (checked: boolean, disabled: boolean) => ({
+    ...styles.radioOption,
+    ...(checked ? styles.radioOptionChecked : {}),
+    ...(disabled ? styles.radioOptionDisabled : {})
+  })
+
   return (
-    <SeccionFormulario>
-      <TituloSeccion>Información Específica</TituloSeccion>
-      <Formulario>
-        <InputOutsideContainer>
+    <section style={styles.sectionContainer}>
+      <div style={styles.sectionHeader}>
+        <h3 style={styles.sectionTitle}>Información Específica</h3>
+      </div>
+      <div style={styles.contentSection}>
+        <div style={styles.cardsGrid}>
           <SeleccionConModal
             className="resultadosAprendizaje"
             onOpenModal={abrirModalResultados}
@@ -199,30 +309,31 @@ export default function SeccionDescriptores({
           >
             {descriptores.resultadosAprendizaje.map((resultado, index) => (
               <div key={index}>
-                {/* {TODO: CREAR COMPONENTE} */}
                 <textarea
-                  className="resultado-aprendizaje-text"
-                  key={index}
                   value={resultado}
                   onChange={(e) => handleResultadosAprendizajeChange(e, index)}
                   rows={2}
                   disabled={modoLectura}
+                  placeholder="Ingrese el resultado de aprendizaje..."
+                  style={{
+                    ...styles.resultadoTextArea,
+                    ...(modoLectura ? styles.textareaDisabled : {})
+                  }}
                 />
                 {index === descriptores.resultadosAprendizaje.length - 1 && (
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <div style={styles.addButtonContainer}>
                     <Button
                       text="+"
                       onClick={aniadirResultadoAprendizaje}
                       disabled={modoLectura}
                       size="small"
-                    ></Button>
+                    />
                   </div>
                 )}
               </div>
             ))}
           </SeleccionConModal>
-        </InputOutsideContainer>
-        <InputOutsideContainer>
+
           <SeleccionConModal
             name="ejes-transversales"
             valorInput={cantidadEjesTransversales}
@@ -232,52 +343,36 @@ export default function SeccionDescriptores({
             tituloModal="Ejes Transversales"
           >
             {descriptores.ejesTransversales.map((eje, index) => (
-              <div key={index}>
-                <label>{eje.nombre}</label>
-                <div className="radio-buttons">
-                  <input
-                    type="radio"
-                    name={eje.nombre}
-                    value="0"
-                    defaultChecked
-                    checked={eje.nivel === 0}
-                    onChange={(e) => handleEjeTransversalChange(e, index)}
-                    disabled={modoLectura}
-                  />
-                  Nada
-                  <input
-                    type="radio"
-                    name={eje.nombre}
-                    value="1"
-                    checked={eje.nivel === 1}
-                    onChange={(e) => handleEjeTransversalChange(e, index)}
-                    disabled={modoLectura}
-                  />
-                  Bajo
-                  <input
-                    type="radio"
-                    name={eje.nombre}
-                    value="2"
-                    checked={eje.nivel === 2}
-                    onChange={(e) => handleEjeTransversalChange(e, index)}
-                    disabled={modoLectura}
-                  />
-                  Medio
-                  <input
-                    type="radio"
-                    name={eje.nombre}
-                    value="3"
-                    checked={eje.nivel === 3}
-                    onChange={(e) => handleEjeTransversalChange(e, index)}
-                    disabled={modoLectura}
-                  />
-                  Alto
+              <div key={index} style={styles.radioGroupContainer}>
+                <label style={styles.radioGroupLabel}>{eje.nombre}</label>
+                <div style={styles.radioOptionsRow}>
+                  {[
+                    { value: 0, label: 'Nada' },
+                    { value: 1, label: 'Bajo' },
+                    { value: 2, label: 'Medio' },
+                    { value: 3, label: 'Alto' }
+                  ].map((option) => (
+                    <label
+                      key={option.value}
+                      style={getRadioStyle(eje.nivel === option.value, modoLectura)}
+                    >
+                      <input
+                        type="radio"
+                        name={eje.nombre}
+                        value={option.value}
+                        checked={eje.nivel === option.value}
+                        onChange={(e) => handleEjeTransversalChange(e, index)}
+                        disabled={modoLectura}
+                        style={styles.hiddenInput}
+                      />
+                      {option.label}
+                    </label>
+                  ))}
                 </div>
               </div>
             ))}
           </SeleccionConModal>
-        </InputOutsideContainer>
-        <InputOutsideContainer>
+
           <SeleccionConModal
             name="actividades-reservadas"
             valorInput={cantidadActividadesReservadas}
@@ -287,52 +382,38 @@ export default function SeccionDescriptores({
             tituloModal="Actividades Reservadas"
           >
             {descriptores.actividadesReservadas.map((actividad, index) => (
-              <div key={index}>
-                <label>{actividad.nombre}</label>
-                <div className="radio-buttons">
-                  <input
-                    type="radio"
-                    name={actividad.nombre}
-                    value="0"
-                    defaultChecked
-                    checked={actividad.nivel === 0}
-                    onChange={(e) => handleActividadReservadaChange(e, index)}
-                    disabled={modoLectura}
-                  />
-                  Nada
-                  <input
-                    type="radio"
-                    name={actividad.nombre}
-                    value="1"
-                    checked={actividad.nivel === 1}
-                    onChange={(e) => handleActividadReservadaChange(e, index)}
-                    disabled={modoLectura}
-                  />
-                  Bajo
-                  <input
-                    type="radio"
-                    name={actividad.nombre}
-                    value="2"
-                    checked={actividad.nivel === 2}
-                    onChange={(e) => handleActividadReservadaChange(e, index)}
-                    disabled={modoLectura}
-                  />
-                  Medio
-                  <input
-                    type="radio"
-                    name={actividad.nombre}
-                    value="3"
-                    checked={actividad.nivel === 3}
-                    onChange={(e) => handleActividadReservadaChange(e, index)}
-                    disabled={modoLectura}
-                  />
-                  Alto
+              <div key={index} style={styles.radioGroupContainer}>
+                <label style={styles.radioGroupLabel}>{actividad.nombre}</label>
+                <div style={styles.radioOptionsRow}>
+                  {[
+                    { value: 0, label: 'Nada' },
+                    { value: 1, label: 'Bajo' },
+                    { value: 2, label: 'Medio' },
+                    { value: 3, label: 'Alto' }
+                  ].map((option) => (
+                    <label
+                      key={option.value}
+                      style={getRadioStyle(actividad.nivel === option.value, modoLectura)}
+                    >
+                      <input
+                        type="radio"
+                        name={actividad.nombre}
+                        value={option.value}
+                        checked={actividad.nivel === option.value}
+                        onChange={(e) => handleActividadReservadaChange(e, index)}
+                        disabled={modoLectura}
+                        style={styles.hiddenInput}
+                      />
+                      {option.label}
+                    </label>
+                  ))}
                 </div>
               </div>
             ))}
           </SeleccionConModal>
-        </InputOutsideContainer>
-        <WholeWidthInputContainer>
+        </div>
+
+        <div style={styles.descriptoresSection}>
           <DoubleSelectionInput
             modoLectura={modoLectura}
             datosParaSeleccion={datosListaSeleccionDescriptores}
@@ -340,8 +421,8 @@ export default function SeccionDescriptores({
             mensajeDeError={erroresPrograma.descriptores.descriptores}
             handleListChange={handleDescriptorChange}
           />
-        </WholeWidthInputContainer>
-      </Formulario>
-    </SeccionFormulario>
+        </div>
+      </div>
+    </section>
   )
 }

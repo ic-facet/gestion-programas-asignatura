@@ -12,18 +12,100 @@ import {
   MODOS_PROGRAMA_ASIGNATURA,
   ASIGNATURA_VACIA
 } from '../../../constants/constants'
-import {
-  SeccionFormulario,
-  BotonAgregarCorrelativa,
-  ModalSeleccionCorrelativa
-} from './SeccionFormulario'
-import { MensajeDeError, TituloSeccion, Modal } from '../../../components'
+import { MensajeDeError, Modal } from '../../../components'
 import {
   CorrelativaAsignaturas,
   CorrelativaCantidad,
   CorrelativaModulo
 } from './ObjetosListaCorrelativas'
 import { concat } from 'lodash'
+
+const styles = {
+  sectionContainer: {
+    width: '90%',
+    maxWidth: '1200px',
+    marginBottom: '24px',
+    background: 'white',
+    borderRadius: '16px',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+    overflow: 'hidden'
+  } as React.CSSProperties,
+  sectionHeader: {
+    width: '100%',
+    background: 'linear-gradient(135deg, var(--primary-color) 0%, #1a4d6d 100%)',
+    padding: '18px 24px',
+    textAlign: 'center' as const,
+    position: 'relative' as const,
+    boxSizing: 'border-box' as const
+  } as React.CSSProperties,
+  sectionTitle: {
+    color: 'white',
+    fontSize: '16px',
+    margin: 0,
+    fontWeight: 600,
+    letterSpacing: '1.2px',
+    textTransform: 'uppercase' as const
+  } as React.CSSProperties,
+  contentSection: {
+    padding: '24px 32px 32px',
+    boxSizing: 'border-box' as const
+  } as React.CSSProperties,
+  correlativasList: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '12px',
+    marginBottom: '16px'
+  } as React.CSSProperties,
+  addButton: {
+    width: '100%',
+    padding: '14px 20px',
+    border: '2px dashed #cbd5e1',
+    borderRadius: '12px',
+    background: '#f8fafc',
+    color: 'var(--primary-color)',
+    fontSize: '14px',
+    fontWeight: 600,
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px'
+  } as React.CSSProperties,
+  addButtonDisabled: {
+    opacity: 0.5,
+    cursor: 'not-allowed'
+  } as React.CSSProperties,
+  modalContent: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '12px',
+    padding: '8px 0'
+  } as React.CSSProperties,
+  modalOption: {
+    width: '100%',
+    padding: '16px 20px',
+    border: '1px solid #e2e8f0',
+    borderRadius: '12px',
+    background: 'white',
+    color: '#374151',
+    fontSize: '14px',
+    fontWeight: 500,
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+    textAlign: 'left' as const
+  } as React.CSSProperties,
+  emptyState: {
+    textAlign: 'center' as const,
+    padding: '32px 20px',
+    color: '#64748b',
+    fontSize: '14px',
+    background: '#f8fafc',
+    borderRadius: '12px',
+    border: '1px dashed #cbd5e1',
+    marginBottom: '16px'
+  } as React.CSSProperties
+}
 
 interface SeccionCorrelativasProps {
   programaAsignatura: ProgramaAsignaturaInterface
@@ -194,14 +276,15 @@ const SeccionCorrelativas: React.FC<SeccionCorrelativasProps> = ({
   }
 
   return (
-    <SeccionFormulario>
+    <section style={styles.sectionContainer}>
       <Modal
         open={modalSeleccionAbierto}
         onClose={handleCerrarModal}
-        modalTitle="¿Qué tipo de correlativa desea agregar?"
+        modalTitle="Seleccionar tipo de correlativa"
       >
-        <ModalSeleccionCorrelativa>
-          <BotonAgregarCorrelativa
+        <div style={styles.modalContent}>
+          <button
+            style={styles.modalOption}
             onClick={() =>
               handleSeleccionRequisitoCorrelativa(
                 REQUISITOS_CORRELATIVA.ASIGNATURA
@@ -209,93 +292,108 @@ const SeccionCorrelativas: React.FC<SeccionCorrelativasProps> = ({
             }
           >
             Asignatura aprobada o regular
-          </BotonAgregarCorrelativa>
-          <BotonAgregarCorrelativa
+          </button>
+          <button
+            style={styles.modalOption}
             onClick={() =>
               handleSeleccionRequisitoCorrelativa(
                 REQUISITOS_CORRELATIVA.CANTIDAD_ASIGNATURAS
               )
             }
           >
-            Número de asignaturas aprobadas/regulares
-          </BotonAgregarCorrelativa>
-          <BotonAgregarCorrelativa
+            Numero de asignaturas aprobadas/regulares
+          </button>
+          <button
+            style={styles.modalOption}
             onClick={() =>
               handleSeleccionRequisitoCorrelativa(REQUISITOS_CORRELATIVA.MODULO)
             }
           >
-            Módulo aprobado o regular
-          </BotonAgregarCorrelativa>
-        </ModalSeleccionCorrelativa>
+            Modulo aprobado o regular
+          </button>
+        </div>
       </Modal>
-      <TituloSeccion>CORRELATIVAS</TituloSeccion>
-      {correlativas.map((correlativa, index) => {
-        if (correlativa.requisito === REQUISITOS_CORRELATIVA.ASIGNATURA) {
-          return (
-            <CorrelativaAsignaturas
-              modoLectura={modoLectura}
-              key={`${programaAsignatura.id}${correlativa.id}`}
-              tipo={correlativa.tipo}
-              asignaturasDisponibles={asignaturasCorrelativasDisponibles}
-              asignaturaSeleccionada={
-                correlativa.asignatura || ASIGNATURA_VACIA
-              }
-              enCambioAsignaturaSeleccionada={(seleccion: number | string) =>
-                handleSeleccionarCorrelativaAsignatura(index, seleccion)
-              }
-              enBorradoCorrelativa={() => handleBorrarCorrelativa(index)}
-              enCambioTipoCorrelativa={(seleccion) =>
-                enCambioTipoCorrelativa(index, seleccion)
-              }
-            />
-          )
-        }
+      <div style={styles.sectionHeader}>
+        <h3 style={styles.sectionTitle}>Correlativas</h3>
+      </div>
+      <div style={styles.contentSection}>
+        {correlativas.length === 0 && modoLectura && (
+          <div style={styles.emptyState}>No hay correlativas registradas</div>
+        )}
+        <div style={styles.correlativasList}>
+          {correlativas.map((correlativa, index) => {
+            if (correlativa.requisito === REQUISITOS_CORRELATIVA.ASIGNATURA) {
+              return (
+                <CorrelativaAsignaturas
+                  modoLectura={modoLectura}
+                  key={`${programaAsignatura.id}${correlativa.id}`}
+                  tipo={correlativa.tipo}
+                  asignaturasDisponibles={asignaturasCorrelativasDisponibles}
+                  asignaturaSeleccionada={
+                    correlativa.asignatura || ASIGNATURA_VACIA
+                  }
+                  enCambioAsignaturaSeleccionada={(seleccion: number | string) =>
+                    handleSeleccionarCorrelativaAsignatura(index, seleccion)
+                  }
+                  enBorradoCorrelativa={() => handleBorrarCorrelativa(index)}
+                  enCambioTipoCorrelativa={(seleccion) =>
+                    enCambioTipoCorrelativa(index, seleccion)
+                  }
+                />
+              )
+            }
 
-        if (
-          correlativa.requisito === REQUISITOS_CORRELATIVA.CANTIDAD_ASIGNATURAS
-        ) {
-          return (
-            <CorrelativaCantidad
-              key={`${programaAsignatura.id}${correlativa.id}`}
-              cantidadAsignaturas={correlativa.cantidadAsignaturas || 0}
-              tipo={correlativa.tipo}
-              enCambioCantidadAsignaturas={(valor) =>
-                handleModificarCantidadAsignaturas(index, valor)
-              }
-              enBorradoCorrelativa={() => handleBorrarCorrelativa(index)}
-              enCambioTipoCorrelativa={(seleccion) =>
-                enCambioTipoCorrelativa(index, seleccion)
-              }
-              modoLectura={modoLectura}
-            />
-          )
-        }
+            if (
+              correlativa.requisito === REQUISITOS_CORRELATIVA.CANTIDAD_ASIGNATURAS
+            ) {
+              return (
+                <CorrelativaCantidad
+                  key={`${programaAsignatura.id}${correlativa.id}`}
+                  cantidadAsignaturas={correlativa.cantidadAsignaturas || 0}
+                  tipo={correlativa.tipo}
+                  enCambioCantidadAsignaturas={(valor) =>
+                    handleModificarCantidadAsignaturas(index, valor)
+                  }
+                  enBorradoCorrelativa={() => handleBorrarCorrelativa(index)}
+                  enCambioTipoCorrelativa={(seleccion) =>
+                    enCambioTipoCorrelativa(index, seleccion)
+                  }
+                  modoLectura={modoLectura}
+                />
+              )
+            }
 
-        if (correlativa.requisito === REQUISITOS_CORRELATIVA.MODULO)
-          return (
-            <CorrelativaModulo
-              key={`${programaAsignatura.id}${correlativa.id}`}
-              modulo={correlativa.modulo || ''}
-              tipo={correlativa.tipo}
-              enCambioModulo={(modulo) => handleModificarModulo(index, modulo)}
-              enBorradoCorrelativa={() => handleBorrarCorrelativa(index)}
-              enCambioTipoCorrelativa={(seleccion) =>
-                enCambioTipoCorrelativa(index, seleccion)
-              }
-              modoLectura={modoLectura}
-            />
-          )
-      })}
-      <MensajeDeError>{erroresSeccionCorrelativas.correlativas}</MensajeDeError>
-      {!modoLectura && (
-        <BotonAgregarCorrelativa
-          onClick={handleAgregarCorrelativa}
-          disabled={modoLectura}
-        >
-          Agregar correlativa
-        </BotonAgregarCorrelativa>
-      )}
-    </SeccionFormulario>
+            if (correlativa.requisito === REQUISITOS_CORRELATIVA.MODULO)
+              return (
+                <CorrelativaModulo
+                  key={`${programaAsignatura.id}${correlativa.id}`}
+                  modulo={correlativa.modulo || ''}
+                  tipo={correlativa.tipo}
+                  enCambioModulo={(modulo) => handleModificarModulo(index, modulo)}
+                  enBorradoCorrelativa={() => handleBorrarCorrelativa(index)}
+                  enCambioTipoCorrelativa={(seleccion) =>
+                    enCambioTipoCorrelativa(index, seleccion)
+                  }
+                  modoLectura={modoLectura}
+                />
+              )
+          })}
+        </div>
+        <MensajeDeError>{erroresSeccionCorrelativas.correlativas}</MensajeDeError>
+        {!modoLectura && (
+          <button
+            onClick={handleAgregarCorrelativa}
+            disabled={modoLectura}
+            style={{
+              ...styles.addButton,
+              ...(modoLectura ? styles.addButtonDisabled : {})
+            }}
+          >
+            + Agregar correlativa
+          </button>
+        )}
+      </div>
+    </section>
   )
 }
 

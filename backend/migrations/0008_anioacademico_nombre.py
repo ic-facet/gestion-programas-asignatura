@@ -3,35 +3,39 @@
 from django.db import migrations, models
 
 
+def column_exists(cursor, table_name, column_name, db_vendor):
+    """Check if a column exists in a table, supporting both SQLite and PostgreSQL."""
+    if db_vendor == 'sqlite':
+        cursor.execute(f"PRAGMA table_info({table_name})")
+        columns = [row[1] for row in cursor.fetchall()]
+        return column_name in columns
+    else:
+        # PostgreSQL/MySQL
+        cursor.execute("""
+            SELECT column_name FROM information_schema.columns
+            WHERE table_name = %s AND column_name = %s
+        """, [table_name, column_name])
+        return cursor.fetchone() is not None
+
+
 def add_column_if_not_exists(apps, schema_editor):
     """Add columns only if they don't already exist."""
     connection = schema_editor.connection
+    db_vendor = connection.vendor
 
     # Check and add dedicacion to backend_rol
     with connection.cursor() as cursor:
-        cursor.execute("""
-            SELECT column_name FROM information_schema.columns
-            WHERE table_name = 'backend_rol' AND column_name = 'dedicacion'
-        """)
-        if not cursor.fetchone():
+        if not column_exists(cursor, 'backend_rol', 'dedicacion', db_vendor):
             cursor.execute('ALTER TABLE "backend_rol" ADD COLUMN "dedicacion" varchar(2) NULL')
 
     # Check and add cargo to backend_rol
     with connection.cursor() as cursor:
-        cursor.execute("""
-            SELECT column_name FROM information_schema.columns
-            WHERE table_name = 'backend_rol' AND column_name = 'cargo'
-        """)
-        if not cursor.fetchone():
+        if not column_exists(cursor, 'backend_rol', 'cargo', db_vendor):
             cursor.execute('ALTER TABLE "backend_rol" ADD COLUMN "cargo" varchar(255) NULL')
 
     # Check and add nombre to backend_anioacademico
     with connection.cursor() as cursor:
-        cursor.execute("""
-            SELECT column_name FROM information_schema.columns
-            WHERE table_name = 'backend_anioacademico' AND column_name = 'nombre'
-        """)
-        if not cursor.fetchone():
+        if not column_exists(cursor, 'backend_anioacademico', 'nombre', db_vendor):
             cursor.execute('ALTER TABLE "backend_anioacademico" ADD COLUMN "nombre" varchar(255) NULL')
 
 

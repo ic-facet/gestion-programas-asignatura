@@ -19,6 +19,8 @@ import {
 import Button from './ui/Button'
 import { MainContentContainer } from './MainContentContainer'
 import Spinner from './Spinner/Spinner'
+import { AsyncSelect } from './AsyncSelect'
+import type { SelectOption } from './AsyncSelect'
 
 export {
   Navbar,
@@ -41,5 +43,8 @@ export {
   DoubleSelectionInput,
   Dropdown,
   MainContentContainer,
-  Spinner
+  Spinner,
+  AsyncSelect
 }
+
+export type { SelectOption }

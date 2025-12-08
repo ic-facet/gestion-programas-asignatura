@@ -42,6 +42,10 @@ from backend.views import (
     AsignaturasDisponiblesAPartirPrograma,
     LogoutAPI,
     DevLoginAPI,
+    CarrerasSearchAPI,
+    SemestresSearchAPI,
+    AsignaturasSearchAPI,
+    AniosLectivosSearchAPI,
 )
 
 informes_patterns = [
@@ -84,6 +88,10 @@ opciones_patterns = [
 
 filtros_patterns = [
     path("", ObtenerFiltros.as_view()),
+    path("carreras/", CarrerasSearchAPI.as_view()),
+    path("semestres/", SemestresSearchAPI.as_view()),
+    path("asignaturas/", AsignaturasSearchAPI.as_view()),
+    path("anios-lectivos/", AniosLectivosSearchAPI.as_view()),
 ]
 
 historial_patterns = [

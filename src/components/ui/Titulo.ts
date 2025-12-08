@@ -1,66 +1,55 @@
-import styled from 'styled-components'
+import React from 'react'
 
-export const Titulo = styled.h1`
-  color: var(--primary-color);
-  font-size: 32px;
-  width: 100%;
-  text-align: center;
-  box-sizing: border-box;
-  margin: 10px 0 20px;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  position: relative;
-  padding-bottom: 15px;
+// Inline styles for page titles
+export const tituloStyles = {
+  titulo: {
+    color: 'var(--primary-color)',
+    fontSize: '32px',
+    width: '100%',
+    textAlign: 'center' as const,
+    boxSizing: 'border-box' as const,
+    margin: '0 0 32px',
+    textTransform: 'uppercase' as const,
+    fontWeight: 700,
+    letterSpacing: '1.5px',
+    position: 'relative' as const,
+    paddingBottom: '20px'
+  } as React.CSSProperties,
+  subtitulo: {
+    color: 'var(--third-color)',
+    textAlign: 'center' as const,
+    fontSize: '22px',
+    margin: '-20px 0 24px',
+    textTransform: 'uppercase' as const,
+    fontWeight: 500,
+    letterSpacing: '1px'
+  } as React.CSSProperties,
+  tituloSeccion: {
+    color: 'white',
+    fontSize: '16px',
+    textAlign: 'center' as const,
+    width: '100%',
+    background: 'linear-gradient(135deg, var(--primary-color) 0%, #1a4d6d 100%)',
+    boxSizing: 'border-box' as const,
+    padding: '18px 24px',
+    textTransform: 'uppercase' as const,
+    margin: 0,
+    fontWeight: 600,
+    letterSpacing: '1.2px',
+    borderRadius: 0,
+    position: 'relative' as const
+  } as React.CSSProperties
+}
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--third-color));
-    border-radius: 2px;
-  }
+// Functional components with inline styles
+export const Titulo: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return React.createElement('h1', { style: tituloStyles.titulo }, children)
+}
 
-  @media (max-width: 768px) {
-    font-size: 26px;
-  }
-`
+export const Subtitulo: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return React.createElement('h2', { style: tituloStyles.subtitulo }, children)
+}
 
-export const Subtitulo = styled.h2`
-  color: var(--third-color);
-  text-align: center;
-  font-size: 22px;
-  margin: -10px 0 10px;
-  text-transform: uppercase;
-  font-weight: 500;
-  letter-spacing: 1px;
-
-  @media (max-width: 768px) {
-    font-size: 18px;
-  }
-`
-
-export const TituloSeccion = styled.h3`
-  color: white;
-  font-size: 18px;
-  text-align: center;
-  width: 100%;
-  background: var(--primary-color);
-  box-sizing: border-box;
-  padding: 14px 20px;
-  text-transform: uppercase;
-  margin: 0;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(45, 102, 157, 0.3);
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-    padding: 12px 15px;
-  }
-`
+export const TituloSeccion: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return React.createElement('h3', { style: tituloStyles.tituloSeccion }, children)
+}
