@@ -11,11 +11,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='anioacademico',
-            name='nombre',
-            field=models.CharField(blank=True, max_length=255, null=True),
-        ),
-        migrations.AddField(
             model_name='rol',
             name='cargo',
             field=models.CharField(blank=True, max_length=255, null=True),
