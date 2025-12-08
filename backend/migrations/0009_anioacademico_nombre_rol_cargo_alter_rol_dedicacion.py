@@ -9,15 +9,5 @@ class Migration(migrations.Migration):
         ('backend', '0008_anioacademico_nombre'),
     ]
 
-    operations = [
-        migrations.AddField(
-            model_name='rol',
-            name='cargo',
-            field=models.CharField(blank=True, max_length=255, null=True),
-        ),
-        migrations.AlterField(
-            model_name='rol',
-            name='dedicacion',
-            field=models.CharField(blank=True, choices=[('N', 'No exclusiva'), ('E', 'Exclusiva')], max_length=2, null=True),
-        ),
-    ]
+    # Operations already applied to database - keeping empty to mark as complete
+    operations = []
