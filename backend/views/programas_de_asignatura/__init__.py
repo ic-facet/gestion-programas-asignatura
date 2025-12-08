@@ -9,6 +9,12 @@ from .informacion_editar_a_partir_del_ultimo import (
     InformacionEditarProgramaAPartirDelUltimoAPI,
 )
 from .historial.filtros import ObtenerFiltros
+from .historial.filtros_paginados import (
+    CarrerasSearchAPI,
+    SemestresSearchAPI,
+    AsignaturasSearchAPI,
+    AniosLectivosSearchAPI,
+)
 from .historial.obtener_programas_historial import ObtenerProgramasHistorial
 from .csv import GenerarMatriz
 from .aprobar_programa import AprobarVersionProgramaAPI

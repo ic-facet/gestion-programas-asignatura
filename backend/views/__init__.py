@@ -12,6 +12,10 @@ from .programas_de_asignatura import (
     GenerarMatriz,
     PedirCambiosVersionProgramaAPI,
     AprobarVersionProgramaAPI,
+    CarrerasSearchAPI,
+    SemestresSearchAPI,
+    AsignaturasSearchAPI,
+    AniosLectivosSearchAPI,
 )
 # from .programas_de_asignatura.pdf.generar_pdf import GenerarPDF  # Comentado para desarrollo local sin GTK
 from .plan import APIListarPlanesDeEstudio

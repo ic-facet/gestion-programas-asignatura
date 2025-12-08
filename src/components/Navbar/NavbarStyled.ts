@@ -460,6 +460,7 @@ export const NavbarTitle = styled.span`
   letter-spacing: 0.5px;
   margin-left: 80px;
   opacity: 0.95;
+  flex: 1;
 
   @media (max-width: 768px) {
     font-size: 16px;
@@ -469,4 +470,47 @@ export const NavbarTitle = styled.span`
   @media (max-width: 480px) {
     display: none;
   }
+`
+
+export const NavbarUserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-right: 24px;
+
+  @media (max-width: 768px) {
+    gap: 10px;
+    margin-right: 16px;
+  }
+
+  @media (max-width: 480px) {
+    display: none;
+  }
+`
+
+export const NavbarUserName = styled.span`
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.95;
+
+  i {
+    font-size: 12px;
+    opacity: 0.8;
+  }
+`
+
+export const NavbarUserRole = styled.span`
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  opacity: 0.9;
 `

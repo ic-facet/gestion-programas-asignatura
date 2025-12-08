@@ -1,4 +1,12 @@
-from mailersend import emails
+try:
+    from mailersend import emails
+    MAILERSEND_AVAILABLE = True
+except ImportError:
+    try:
+        from mailersend import Email
+        MAILERSEND_AVAILABLE = True
+    except ImportError:
+        MAILERSEND_AVAILABLE = False
 
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -15,7 +23,15 @@ class ServicioEmail:
         subject: str,
         context: object,
     ):
-        mailer = emails.NewEmail(settings.MAILERSEND_API_KEY)
+        if not MAILERSEND_AVAILABLE:
+            print(f"[WARNING] mailersend no disponible. Email no enviado: {subject}")
+            return None
+
+        try:
+            mailer = emails.NewEmail(settings.MAILERSEND_API_KEY)
+        except:
+            mailer = Email(settings.MAILERSEND_API_KEY)
+
         mail_from = {"email": settings.MAILERSEND_FROM}
         destinatarios_array = [
             {"email": destinatario} for destinatario in destinatarios

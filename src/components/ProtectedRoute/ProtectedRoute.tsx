@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { RUTAS_PAGINAS } from '../../constants/constants'
+import Spinner from '../Spinner/Spinner'
 
 interface ProtectedRouteProps {
   children: React.ReactNode
@@ -8,7 +9,12 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute = ({ children, requiresAuth }: ProtectedRouteProps) => {
-  const { auth } = useAuth()
+  const { auth, isAuthLoading } = useAuth()
+
+  // Mientras se verifica la autenticación, mostrar spinner
+  if (isAuthLoading) {
+    return <Spinner />
+  }
 
   // Si la ruta requiere autenticación y el usuario NO está logueado, redirigir a login
   if (requiresAuth && !auth.isLoggedIn) {

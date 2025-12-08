@@ -1,63 +1,46 @@
 import { useState } from 'react'
-import useHistorial from './hooks/useHistorial'
-import useFiltros from './hooks/useFiltros'
 import TableHistorial from './components/TableHistorial'
 import { useNavigate } from 'react-router-dom'
 import { MODOS_PROGRAMA_ASIGNATURA } from '../../constants/constants'
-import Filtros from './components/Filtros'
+import FiltrosAsync from './components/FiltrosAsync'
 import { ProgramasHistorial } from '../../types'
 import { client } from '../../utils/axiosClient'
-import { Titulo, Spinner } from '../../components'
+import { Titulo } from '../../components'
 import { Container, Content } from './HistorialStyled'
 
 export default function Historial() {
   const navigate = useNavigate()
   const [programasHistorial, setProgramasHistorial] =
     useState<ProgramasHistorial | null>(null)
-
-  const {
-    filtros,
-    selectedFiltros,
-    setSelectedFiltros,
-    loadingFiltros,
-    errorFiltros
-  } = useFiltros()
-
-  const {
-    searchHistorialProgramas,
-    loading: tablaLoading,
-    error: errorTabla
-  } = useHistorial({
-    setProgramasHistorial
-  })
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   const tableColumns = ['Asignatura', 'Acciones']
 
-  if (errorFiltros) {
-    return (
-      <Container>
-        <Content>
-          <Titulo>Historial de programas</Titulo>
-          <div style={{ textAlign: 'center', padding: '40px', color: '#dc3545' }}>
-            <i className="fas fa-exclamation-circle" style={{ fontSize: '48px', marginBottom: '16px', display: 'block' }} />
-            <h2>Error al cargar los filtros</h2>
-          </div>
-        </Content>
-      </Container>
-    )
-  }
+  const handleSearch = async (filters: {
+    carrera: number | string | null
+    semestre: number | string | null
+    asignatura: number | string | null
+    anio_lectivo: number | string | null
+  }) => {
+    setLoading(true)
+    setError(false)
 
-  if (loadingFiltros || !filtros) {
-    return (
-      <Container>
-        <Content>
-          <Titulo>Historial de programas</Titulo>
-          <div style={{ display: 'flex', justifyContent: 'center', padding: '80px 20px' }}>
-            <Spinner />
-          </div>
-        </Content>
-      </Container>
-    )
+    try {
+      const params = new URLSearchParams()
+      if (filters.carrera) params.append('carrera', String(filters.carrera))
+      if (filters.semestre) params.append('semestre', String(filters.semestre))
+      if (filters.asignatura) params.append('asignatura', String(filters.asignatura))
+      if (filters.anio_lectivo) params.append('anio_academico', String(filters.anio_lectivo))
+
+      const response = await client.get(`/api/historial/?${params.toString()}`)
+      setProgramasHistorial(response.data)
+    } catch (err) {
+      console.error('Error fetching historial:', err)
+      setError(true)
+    } finally {
+      setLoading(false)
+    }
   }
 
   const verPrograma = (id: number | null, modoPrograma: string) => {
@@ -94,20 +77,15 @@ export default function Historial() {
     <Container>
       <Content>
         <Titulo>Historial de programas</Titulo>
-        <Filtros
-          filtros={filtros}
-          setSelectedFiltros={setSelectedFiltros}
-          searchHistorialProgramas={searchHistorialProgramas}
-          selectedFiltros={selectedFiltros}
-        />
+        <FiltrosAsync onSearch={handleSearch} />
 
         <TableHistorial
           tableColumns={tableColumns}
           tableData={programasHistorial}
           verPrograma={verPrograma}
           imprimir={imprimir}
-          isLoading={tablaLoading}
-          error={errorTabla}
+          isLoading={loading}
+          error={error}
         />
       </Content>
     </Container>

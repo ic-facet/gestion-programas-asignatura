@@ -30,10 +30,11 @@ export const Content = styled.div`
 export const FilterSection = styled.section`
   background: white;
   border-radius: 20px;
-  padding: 30px;
+  padding: 32px 36px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   margin-top: 30px;
   animation: slideUp 0.5s ease-out;
+  border: 1px solid rgba(0, 0, 0, 0.04);
 
   @keyframes slideUp {
     from {
@@ -44,6 +45,10 @@ export const FilterSection = styled.section`
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  @media (max-width: 768px) {
+    padding: 24px 20px;
   }
 `
 
@@ -64,12 +69,102 @@ export const FilterTitle = styled.h2`
 
 export const FilterGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-bottom: 25px;
 
-  @media (max-width: 768px) {
+  /* Cada filtro */
+  .filter-item {
+    display: flex;
+    flex-direction: column;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: rgba(45, 102, 157, 0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .filter-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+  }
+
+  /* Fallback para el dropdown viejo */
+  > div:not(.filter-item) {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+
+    > span {
+      display: block !important;
+      width: auto !important;
+      min-width: unset !important;
+      text-align: left !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      color: var(--primary-color) !important;
+      background: transparent !important;
+      border-radius: 0 !important;
+      padding: 0 0 8px 0 !important;
+      margin: 0 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 1px !important;
+    }
+
+    > div {
+      width: 100% !important;
+      border-radius: 10px !important;
+      border: none !important;
+      box-shadow: none !important;
+      overflow: hidden;
+
+      select {
+        padding: 14px 44px 14px 16px !important;
+        font-size: 14px !important;
+        min-height: 48px !important;
+        border-radius: 10px !important;
+        background-color: white !important;
+        border: 2px solid #e2e8f0 !important;
+        width: 100% !important;
+        cursor: pointer;
+
+        &:hover:not(:disabled) {
+          border-color: var(--primary-color) !important;
+        }
+
+        &:focus {
+          border-color: var(--primary-color) !important;
+          box-shadow: 0 0 0 3px rgba(45, 102, 157, 0.12) !important;
+          outline: none !important;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 600px) {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 `
 

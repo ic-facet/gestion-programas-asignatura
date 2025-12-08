@@ -21,6 +21,7 @@ interface AuthContextType {
   setAuth: React.Dispatch<React.SetStateAction<Auth>>
   handleLogout: () => void
   getAuthUser: () => void
+  isAuthLoading: boolean
 }
 
 const defaultAuth: Auth = {
@@ -41,11 +42,13 @@ const AuthContext = createContext<AuthContextType>({
   auth: defaultAuth,
   setAuth: () => {},
   handleLogout: () => {},
-  getAuthUser: () => {}
+  getAuthUser: () => {},
+  isAuthLoading: true
 })
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [auth, setAuth] = useState<Auth>(defaultAuth)
+  const [isAuthLoading, setIsAuthLoading] = useState(true)
   const navigate = useNavigate()
 
   const handleLogout = async () => {
@@ -58,6 +61,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const getAuthUser = async () => {
+    setIsAuthLoading(true)
     client
       .get(`auth/me/`)
       .then((res) => {
@@ -74,6 +78,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       .catch((err) => {
         console.log('[ERROR ON AUTH]', err)
       })
+      .finally(() => {
+        setIsAuthLoading(false)
+      })
   }
 
   useEffect(() => {
@@ -81,7 +88,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth, handleLogout, getAuthUser }}>
+    <AuthContext.Provider value={{ auth, setAuth, handleLogout, getAuthUser, isAuthLoading }}>
       {children}
     </AuthContext.Provider>
   )
