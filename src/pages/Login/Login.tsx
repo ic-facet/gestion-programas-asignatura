@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
 import img from '../../img'
 import { RUTAS_PAGINAS } from '../../constants/constants'
 import { DEV_MODE } from '../../helpers/env-variables'
@@ -12,20 +11,20 @@ import {
   LogoContainer,
   LogoUNT,
   LogoFACET,
-  LoginTitle,
-  LoginSubtitle,
-  LoginH3,
+  InstitucionalBadge,
+  SistemaNombre,
+  SistemaDescripcion,
   Text,
   LoginButton,
   Divider,
-  BackButton
+  BackButton,
+  AccionContainer
 } from './LoginStyled'
 
 const BASE_FRONTEND_URL = import.meta.env.VITE_BASE_FRONTEND_URL
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_OAUTH2_CLIENT_ID
 
 const Login: React.FC = () => {
-  const navigate = useNavigate()
   const { getAuthUser } = useAuth()
 
   const openGoogleLoginPage = useCallback(() => {
@@ -54,15 +53,17 @@ const Login: React.FC = () => {
     try {
       await client.post('auth/dev-login/')
       await getAuthUser()
-      navigate(RUTAS_PAGINAS.INICIO)
+      // Usar window.location para forzar recarga completa
+      window.location.href = '/'
     } catch (error) {
       console.error('Error en login de desarrollo:', error)
     }
-  }, [navigate, getAuthUser])
+  }, [getAuthUser])
 
   const handleGoBack = useCallback(() => {
-    navigate(RUTAS_PAGINAS.INICIO)
-  }, [navigate])
+    // Usar window.location para navegación más confiable
+    window.location.href = '/'
+  }, [])
 
   return (
     <Container>
@@ -81,26 +82,29 @@ const Login: React.FC = () => {
           <LogoFACET src={img.FACET} alt="Logo FACET" />
         </LogoContainer>
 
-        <LoginTitle>
-          Sistema de Gestión de Programas de Asignatura
-        </LoginTitle>
-        <LoginSubtitle>
-          Facultad de Ciencias Exactas y Tecnología
-        </LoginSubtitle>
-        <LoginH3>Universidad Nacional de Tucumán</LoginH3>
+        <InstitucionalBadge>Universidad Nacional de Tucumán</InstitucionalBadge>
 
-        <Text>
-          Para acceder a las funciones del sistema, inicie sesión con Google.
-          Si es su primera vez, comuníquese con el administrador para obtener acceso.
-        </Text>
+        <SistemaNombre>SGPA</SistemaNombre>
 
-        <LoginButton onClick={openGoogleLoginPage}>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
-            alt="Google"
-          />
-          <p>Iniciar sesión con Google</p>
-        </LoginButton>
+        <SistemaDescripcion>
+          Sistema de Gestión para Programas de Asignatura
+        </SistemaDescripcion>
+
+        <AccionContainer>
+          <Text>
+            Para acceder a las funciones del sistema, inicie sesión con Google.
+            Si es su primera vez, comuníquese con el administrador para obtener
+            acceso.
+          </Text>
+
+          <LoginButton onClick={openGoogleLoginPage}>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
+              alt="Google"
+            />
+            <p>Iniciar sesión con Google</p>
+          </LoginButton>
+        </AccionContainer>
 
         {DEV_MODE && (
           <>

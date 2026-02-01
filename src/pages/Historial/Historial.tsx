@@ -5,8 +5,13 @@ import { MODOS_PROGRAMA_ASIGNATURA } from '../../constants/constants'
 import FiltrosAsync from './components/FiltrosAsync'
 import { ProgramasHistorial } from '../../types'
 import { client } from '../../utils/axiosClient'
-import { Titulo } from '../../components'
-import { Container, Content } from './HistorialStyled'
+import { Titulo, Button } from '../../components'
+import {
+  Container,
+  Content,
+  HeaderSection,
+  BackButtonContainer
+} from './HistorialStyled'
 
 export default function Historial() {
   const navigate = useNavigate()
@@ -30,8 +35,10 @@ export default function Historial() {
       const params = new URLSearchParams()
       if (filters.carrera) params.append('carrera', String(filters.carrera))
       if (filters.semestre) params.append('semestre', String(filters.semestre))
-      if (filters.asignatura) params.append('asignatura', String(filters.asignatura))
-      if (filters.anio_lectivo) params.append('anio_academico', String(filters.anio_lectivo))
+      if (filters.asignatura)
+        params.append('asignatura', String(filters.asignatura))
+      if (filters.anio_lectivo)
+        params.append('anio_academico', String(filters.anio_lectivo))
 
       const response = await client.get(`/api/historial/?${params.toString()}`)
       setProgramasHistorial(response.data)
@@ -46,6 +53,10 @@ export default function Historial() {
   const verPrograma = (id: number | null, modoPrograma: string) => {
     if (modoPrograma === MODOS_PROGRAMA_ASIGNATURA.VER)
       navigate(`/programa-asignatura/${id}`)
+  }
+
+  const handleVolver = () => {
+    window.location.href = '/'
   }
 
   const imprimir = (id: number | string | null) => {
@@ -76,7 +87,16 @@ export default function Historial() {
   return (
     <Container>
       <Content>
-        <Titulo>Historial de programas</Titulo>
+        <HeaderSection>
+          <BackButtonContainer>
+            <Button
+              text="← Volver al inicio"
+              onClick={handleVolver}
+              variant="secondary"
+            />
+          </BackButtonContainer>
+          <Titulo>Historial de Programas</Titulo>
+        </HeaderSection>
         <FiltrosAsync onSearch={handleSearch} />
 
         <TableHistorial

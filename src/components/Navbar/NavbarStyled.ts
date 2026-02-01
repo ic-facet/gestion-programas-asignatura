@@ -15,8 +15,17 @@ const slideIn = keyframes`
   }
 `
 
+const pulseBorder = keyframes`
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+  }
+`
+
 export const NavbarWrapper = styled.nav<NavbarProps>`
-  background: linear-gradient(135deg, var(--dark-color) 0%, #1a4d6d 100%);
+  background: var(--primary-color);
   border: none;
   width: 100%;
   display: flex;
@@ -39,7 +48,12 @@ export const NavbarWrapper = styled.nav<NavbarProps>`
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
   }
 `
 
@@ -51,7 +65,8 @@ export const BurgerButton = styled.button<NavbarProps>`
   color: white;
   border: none;
   font-size: 22px;
-  background-color: ${(p) => (p.$isOpen ? 'rgba(255, 255, 255, 0.15)' : 'transparent')};
+  background-color: ${(p) =>
+    p.$isOpen ? 'rgba(255, 255, 255, 0.15)' : 'transparent'};
   cursor: pointer;
   padding: 10px 14px;
   border-radius: 12px;
@@ -96,19 +111,49 @@ export const SidebarContainer = styled.div<NavbarProps>`
   bottom: 0;
   height: 100vh;
   z-index: 150;
-  background: linear-gradient(180deg, var(--primary-color) 0%, #1a4d6d 100%);
+  background: linear-gradient(
+    180deg,
+    var(--primary-color) 0%,
+    #1a4d6d 50%,
+    var(--secondary-color) 100%
+  );
+  background-size: 100% 200%;
   width: 350px;
   box-shadow: ${(p) => (p.$isOpen ? '8px 0 40px rgba(0, 0, 0, 0.3)' : 'none')};
   transform: translateX(${(p) => (p.$isOpen ? '0' : '-100%')});
   opacity: 1;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.4s ease;
+  transition:
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.4s ease;
   overflow-y: auto;
   overflow-x: hidden;
 
-  ${(p) => p.$isOpen && css`
-    animation: ${slideIn} 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  `}
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at top left,
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 40%
+      ),
+      radial-gradient(
+        ellipse at bottom right,
+        rgba(255, 255, 255, 0.08) 0%,
+        transparent 40%
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  ${(p) =>
+    p.$isOpen &&
+    css`
+      animation: ${slideIn} 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    `}
 
   /* Scrollbar styling */
   &::-webkit-scrollbar {
@@ -147,8 +192,15 @@ export const UserInfoSection = styled.div`
   flex-direction: row;
   padding: 24px;
   box-sizing: border-box;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.15) 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    ),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   position: relative;
   overflow: hidden;
   margin-bottom: 8px;
@@ -160,8 +212,27 @@ export const UserInfoSection = styled.div`
     right: -50%;
     width: 100%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 70%
+    );
     pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
   }
 `
 
@@ -169,15 +240,21 @@ export const ProfilePicture = styled.img`
   height: 56px;
   width: 56px;
   border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 0 0 4px rgba(255, 255, 255, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   object-fit: cover;
+  animation: ${pulseBorder} 3s ease-in-out infinite;
 
   &:hover {
     transform: scale(1.08);
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow:
+      0 6px 24px rgba(0, 0, 0, 0.4),
+      0 0 0 6px rgba(255, 255, 255, 0.15);
+    animation: none;
   }
 `
 
@@ -235,16 +312,41 @@ export const QuickActionButton = styled.button`
   justify-content: center;
   gap: 8px;
   padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   color: white;
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
 
   i {
     font-size: 14px;
@@ -252,9 +354,20 @@ export const QuickActionButton = styled.button`
   }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.12) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.25);
     transform: translateY(-2px);
+    box-shadow:
+      0 8px 25px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+    &::before {
+      left: 100%;
+    }
 
     i {
       transform: scale(1.1);
@@ -267,7 +380,9 @@ export const QuickActionButton = styled.button`
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 0 0 3px rgba(255, 255, 255, 0.2),
+      0 4px 15px rgba(0, 0, 0, 0.1);
   }
 `
 
@@ -290,7 +405,9 @@ export const ContentOverlay = styled.div<NavbarProps>`
   left: 0;
   opacity: ${(p) => (p.$isOpen ? 1 : 0)};
   visibility: ${(p) => (p.$isOpen ? 'visible' : 'hidden')};
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
   cursor: pointer;
 `
 
@@ -302,31 +419,44 @@ export const SectionContainer = styled.div`
 `
 
 export const SectionTitle = styled.div`
-  margin: 20px 24px 12px 24px;
+  margin: 24px 24px 16px 24px;
   width: calc(100% - 48px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 12px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--secondary-color), transparent);
+  }
 `
 
 export const SectionIcon = styled.i`
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--secondary-color);
   width: 18px;
   text-align: center;
+  opacity: 0.8;
 `
 
 export const Title = styled.h2`
   font-size: 11px;
   padding: 0;
   margin: 0;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 600;
   flex: 1;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
+  font-family: var(--font-family-secondary, 'Poppins', sans-serif);
 `
 
 export const SubsectionList = styled.ul`
@@ -337,7 +467,7 @@ export const SubsectionList = styled.ul`
 `
 
 export const SubsectionItem = styled.li`
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-left: 3px solid transparent;
   position: relative;
   overflow: hidden;
@@ -349,21 +479,45 @@ export const SubsectionItem = styled.li`
     top: 0;
     bottom: 0;
     width: 0;
-    background: rgba(255, 255, 255, 0.05);
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 100%
+    );
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 60%;
+    background: var(--secondary-color);
+    border-radius: 0 3px 3px 0;
     transition: width 0.3s ease;
+    opacity: 0.8;
   }
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.08);
-    border-left-color: var(--secondary-color);
+    background-color: rgba(255, 255, 255, 0.06);
+    border-left-color: transparent;
+    transform: translateX(4px);
 
     &::before {
       width: 100%;
     }
+
+    &::after {
+      width: 4px;
+    }
   }
 
   &:active {
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(2px);
   }
 `
 
@@ -371,13 +525,13 @@ export const BotonSeccion = styled.button`
   border: none;
   font-size: 14px;
   padding: 16px 28px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
   width: 100%;
   text-align: left;
   font-weight: 400;
   background-color: transparent;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   letter-spacing: 0.3px;
   display: flex;
   align-items: center;
@@ -388,8 +542,8 @@ export const BotonSeccion = styled.button`
     font-size: 16px;
     width: 20px;
     text-align: center;
-    opacity: 0.8;
-    transition: all 0.25s ease;
+    opacity: 0.7;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &:hover {
@@ -399,6 +553,7 @@ export const BotonSeccion = styled.button`
     i {
       opacity: 1;
       transform: scale(1.1);
+      color: var(--secondary-color);
     }
   }
 
@@ -412,22 +567,32 @@ export const BotonSeccion = styled.button`
   }
 
   &.cerrar-sesion {
-    position: fixed;
+    position: sticky;
     bottom: 0;
     left: 0;
-    width: 350px;
+    width: 100%;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    background: linear-gradient(135deg, rgba(220, 53, 69, 0.15) 0%, rgba(220, 53, 69, 0.1) 100%);
-    color: #ff7b7b;
+    background: linear-gradient(
+      135deg,
+      rgba(220, 53, 69, 0.25) 0%,
+      rgba(220, 53, 69, 0.15) 100%
+    );
+    color: #ff9e9e;
     font-weight: 500;
     padding: 18px 28px;
+    z-index: 10;
+    margin-top: auto;
 
     i {
-      color: #ff7b7b;
+      color: #ff9e9e;
     }
 
     &:hover {
-      background: linear-gradient(135deg, rgba(220, 53, 69, 0.25) 0%, rgba(220, 53, 69, 0.15) 100%);
+      background: linear-gradient(
+        135deg,
+        rgba(220, 53, 69, 0.3) 0%,
+        rgba(220, 53, 69, 0.15) 100%
+      );
       color: #ff5252;
       padding-left: 32px;
 
@@ -437,7 +602,7 @@ export const BotonSeccion = styled.button`
     }
 
     @media (max-width: 768px) {
-      width: 100vw;
+      width: 100%;
     }
   }
 `
