@@ -16,7 +16,7 @@ cryptography==41.0.3
 cssselect2==0.7.0
 defusedxml==0.7.1
 dj-database-url==2.1.0
-Django==4.2.4
+Django==4.2.17
 # django-admin==2.0.2  # Comentado: depende de paquetes problemáticos en Windows y no se usa en el proyecto
 django-allauth==0.55.0
 django-cors-headers==4.2.0

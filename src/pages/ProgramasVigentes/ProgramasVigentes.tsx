@@ -4,19 +4,28 @@ import { useNavigate } from 'react-router-dom'
 import { MODOS_PROGRAMA_ASIGNATURA } from '../../constants/constants'
 import { client } from '../../utils/axiosClient'
 import { RUTAS_PAGINAS } from '../../constants/constants'
-import { Titulo } from '../../components'
-import { Container, Content } from './ProgramasVigentesStyled'
+import { Titulo, Button } from '../../components'
+import {
+  Container,
+  Content,
+  HeaderSection,
+  BackButtonContainer
+} from './ProgramasVigentesStyled'
 
 export default function ProgramasVigentes() {
   const navigate = useNavigate()
 
-  const { programasVigentes, loading, error } = useProgramasVigentes()
+  const { programasVigentes, loading, error, errorMessage } = useProgramasVigentes()
 
   const tableColumns = ['Asignatura', 'Estado', 'Acciones']
 
   const verPrograma = (id: number | string, modoPrograma: string) => {
     if (modoPrograma === MODOS_PROGRAMA_ASIGNATURA.VER)
       navigate(`${RUTAS_PAGINAS.PROGRAMA_DE_ASIGNATURA}/${id}`)
+  }
+
+  const handleVolver = () => {
+    window.location.href = '/'
   }
 
   const imprimir = (id: number | string) => {
@@ -50,7 +59,16 @@ export default function ProgramasVigentes() {
   return (
     <Container>
       <Content>
-        <Titulo>Programas Vigentes</Titulo>
+        <HeaderSection>
+          <BackButtonContainer>
+            <Button
+              text="← Volver al inicio"
+              onClick={handleVolver}
+              variant="secondary"
+            />
+          </BackButtonContainer>
+          <Titulo>Programas Vigentes</Titulo>
+        </HeaderSection>
         <TableProgramasVigentes
           tableColumns={tableColumns}
           tableData={programasVigentes}
@@ -58,6 +76,7 @@ export default function ProgramasVigentes() {
           imprimir={imprimir}
           isLoading={loading}
           error={error}
+          errorMessage={errorMessage}
         />
       </Content>
     </Container>

@@ -37,6 +37,7 @@ interface TableProps {
   imprimir: (id: number | string, modoPrograma: ModosProgramaAsignatura) => void
   isLoading: boolean
   error: boolean
+  errorMessage?: string
 }
 
 type ModosProgramaAsignatura = keyof typeof MODOS_PROGRAMA_ASIGNATURA
@@ -47,7 +48,8 @@ export default function Table({
   verPrograma,
   imprimir,
   isLoading,
-  error
+  error,
+  errorMessage
 }: TableProps) {
   // Si acciones no es null entonces renderizamos esa columna
 
@@ -109,7 +111,7 @@ export default function Table({
             <ErrorRow>
               <td colSpan={3}>
                 <i className="fas fa-exclamation-triangle" />
-                Ocurrió un error al momento de realizar la búsqueda
+                {errorMessage || 'Ocurrió un error al momento de realizar la búsqueda'}
               </td>
             </ErrorRow>
           ) : (

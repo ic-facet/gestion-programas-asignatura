@@ -3,13 +3,14 @@ import React, { useState } from 'react'
 import TablaPlanesEstudio from './TablasPlanesEstudio/TablaPlanesEstudio'
 import usePlanesDeEstudio from './hooks/usePlanesDeEstudio'
 import { getMatrizDeTributacion } from './servicios'
-import { Modal, Titulo, Subtitulo } from '../../components'
+import { Modal, Titulo, Subtitulo, Button } from '../../components'
 import {
   Container,
   Header,
   TableContainer,
   LoadingContainer,
-  ErrorContainer
+  ErrorContainer,
+  BackButtonContainer
 } from './MatrizStyled'
 
 const COLUMNAS_TABLA = ['Plan de Estudio', 'Carrera', 'Acciones']
@@ -18,6 +19,10 @@ const Matriz: React.FC = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const { loading, error, planesDeEstudio } = usePlanesDeEstudio()
   const [mensajeDeError, setMensajeDeError] = useState<string>('')
+
+  const handleVolver = () => {
+    window.location.href = '/'
+  }
 
   const handleGenerarMatriz = (idPlan: number, idCarrera: number) => {
     getMatrizDeTributacion(idPlan, idCarrera).then((response) => {
@@ -65,14 +70,19 @@ const Matriz: React.FC = () => {
       </Modal>
 
       <Header>
+        <BackButtonContainer>
+          <Button
+            text="← Volver al inicio"
+            onClick={handleVolver}
+            variant="secondary"
+          />
+        </BackButtonContainer>
         <Titulo>Generar Reportes</Titulo>
         <Subtitulo>Matriz de Tributación</Subtitulo>
       </Header>
 
       {loading ? (
-        <LoadingContainer>
-          Cargando planes de estudio...
-        </LoadingContainer>
+        <LoadingContainer>Cargando planes de estudio...</LoadingContainer>
       ) : error ? (
         <ErrorContainer>
           <i className="fas fa-exclamation-triangle" />

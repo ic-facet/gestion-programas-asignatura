@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px;
+  padding: 20px 20px 40px;
   background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
 `
 
@@ -166,8 +166,12 @@ export const LoadingContainer = styled.div`
   }
 
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `
 
@@ -189,5 +193,42 @@ export const ErrorContainer = styled.div`
   i {
     margin-right: 12px;
     font-size: 24px;
+  }
+`
+
+export const BackButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+
+  button {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1a4d6d 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(45, 102, 157, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(45, 102, 157, 0.4);
+      background: linear-gradient(
+        135deg,
+        #1a4d6d 0%,
+        var(--primary-color) 100%
+      );
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(45, 102, 157, 0.3);
+    }
   }
 `

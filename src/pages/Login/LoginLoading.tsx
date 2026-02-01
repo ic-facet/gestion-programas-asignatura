@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import queryString from 'query-string'
 import useAuth from '../../hooks/useAuth'
 import { client } from '../../utils/axiosClient'
@@ -8,7 +8,6 @@ import { Spinner } from '../../components'
 const LoginLoading: React.FC = () => {
   const location = useLocation()
   const { getAuthUser } = useAuth()
-  const navigate = useNavigate()
 
   useEffect(() => {
     const values = queryString.parse(location.search)
@@ -19,17 +18,17 @@ const LoginLoading: React.FC = () => {
     }
   }, [])
 
-  const googleLoginHandler = (code: string) => {
-    return client
-      .get(`auth/login/google/${code}`)
-      .then(() => {
-        getAuthUser()
-        navigate('/')
-        return true
-      })
-      .catch(() => {
-        navigate('/')
-      })
+  const googleLoginHandler = async (code: string) => {
+    try {
+      await client.get(`auth/login/google/${code}`)
+      await getAuthUser()
+      // Usar window.location para forzar recarga completa y actualizar estado
+      window.location.href = '/'
+      return true
+    } catch (error) {
+      console.error('Error en login:', error)
+      window.location.href = '/'
+    }
   }
 
   const onGooglelogin = async () => {

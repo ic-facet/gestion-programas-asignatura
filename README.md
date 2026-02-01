@@ -53,7 +53,7 @@ El usuario de desarrollo tiene:
    cd C:\Users\tu-usuario\ruta\al\proyecto\gestion-programas-asignatura
    ```
 
-2. **Crear el entorno virtual** de python con versión `3.11.4`:
+2. **Crear el entorno virtual** de python con versión `3.11.4` o superior (compatible con `3.12`):
 
    ```bash
    python -m venv venv
