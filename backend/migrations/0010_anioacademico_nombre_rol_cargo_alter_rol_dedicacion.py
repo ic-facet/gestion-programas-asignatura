@@ -10,15 +10,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        # El campo 'nombre' ya fue agregado en la migración 0008
-        migrations.AddField(
-            model_name='rol',
-            name='cargo',
-            field=models.CharField(blank=True, max_length=255, null=True),
-        ),
-        migrations.AlterField(
-            model_name='rol',
-            name='dedicacion',
-            field=models.CharField(blank=True, choices=[('N', 'No exclusiva'), ('E', 'Exclusiva')], max_length=2, null=True),
-        ),
+        # Los campos ya fueron agregados en la migración 0008
+        # Esta migración se mantiene vacía para marcarla como aplicada
     ]
