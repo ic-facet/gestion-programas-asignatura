@@ -93,9 +93,9 @@ export const Card = styled.div`
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 48px 32px 36px;
+    padding: 28px 24px 24px;
     max-width: 95%;
-    border-radius: 24px;
+    border-radius: 20px;
   }
 `
 
@@ -104,7 +104,12 @@ export const LogoContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
+
+  @media (max-width: 768px) {
+    gap: 20px;
+    margin-bottom: 12px;
+  }
 `
 
 export const LogoUNT = styled.img`
@@ -184,6 +189,7 @@ export const InstitucionalBadge = styled.div`
   @media (max-width: 768px) {
     font-size: 12px;
     padding: 6px 16px;
+    margin-bottom: 8px;
   }
 `
 
@@ -201,6 +207,7 @@ export const SistemaNombre = styled.h1`
   @media (max-width: 768px) {
     font-size: 36px;
     letter-spacing: 1px;
+    margin-bottom: 4px;
   }
 `
 
@@ -214,8 +221,8 @@ export const SistemaDescripcion = styled.h2`
   line-height: 1.4;
 
   @media (max-width: 768px) {
-    font-size: 16px;
-    margin-bottom: 16px;
+    font-size: 14px;
+    margin-bottom: 8px;
   }
 `
 
@@ -228,6 +235,7 @@ export const LoginSubtitle = styled.p`
 
   @media (max-width: 768px) {
     font-size: 13px;
+    margin-bottom: 16px;
   }
 `
 
@@ -241,8 +249,9 @@ export const Text = styled.p`
   margin: 0;
 
   @media (max-width: 768px) {
-    font-size: 14px;
-    padding: 16px 0;
+    font-size: 13px;
+    padding: 8px 0;
+    line-height: 1.4;
   }
 `
 
@@ -292,7 +301,7 @@ export const LoginButton = styled.button<{ $isDev?: boolean }>`
 
   @media (max-width: 768px) {
     min-width: 250px;
-    padding: 14px 24px;
+    padding: 12px 20px;
     font-size: 14px;
   }
 `
@@ -409,11 +418,12 @@ export const ProfileImage = styled.div`
   }
 
   @media (max-width: 768px) {
-    height: 90px;
-    width: 90px;
+    height: 80px;
+    width: 80px;
+    margin-bottom: 12px;
 
     i {
-      font-size: 45px;
+      font-size: 40px;
     }
   }
 `
@@ -435,8 +445,9 @@ export const AccionContainer = styled.div`
   width: 100%;
 
   @media (max-width: 768px) {
-    padding: 20px;
-    gap: 14px;
+    padding: 12px;
+    gap: 8px;
+    margin: 8px 0 12px;
   }
 `
 
