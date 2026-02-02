@@ -57,6 +57,11 @@ export const Portada = styled.div`
   padding: 80px 20px;
   overflow: hidden;
 
+  @media (max-width: 768px) {
+    padding: 32px 16px;
+    min-height: auto;
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -240,7 +245,8 @@ export const Funcionalidad = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 36px 28px;
+    font-size: 13px;
+    line-height: 1.5;
   }
 `
 
@@ -363,8 +369,8 @@ export const TextoBienvenidaContainer = styled.div`
 
   @media (max-width: 768px) {
     margin: 0 20px;
-    padding: 40px 28px;
-    border-radius: 24px;
+    padding: 32px 24px;
+    border-radius: 20px;
   }
 `
 
@@ -382,7 +388,7 @@ export const LogoFacet = styled.img`
 
   @media (max-width: 768px) {
     height: 90px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
 `
 
@@ -429,7 +435,7 @@ export const InstitucionalBadge = styled.div`
   @media (max-width: 768px) {
     font-size: 12px;
     padding: 6px 16px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
 `
 
@@ -447,6 +453,7 @@ export const SistemaNombre = styled.h1`
   @media (max-width: 768px) {
     font-size: 40px;
     letter-spacing: 1px;
+    margin-bottom: 4px;
   }
 `
 
@@ -461,7 +468,7 @@ export const SistemaDescripcion = styled.h2`
 
   @media (max-width: 768px) {
     font-size: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
 `
 
@@ -483,8 +490,9 @@ export const AccionContainer = styled.div`
   max-width: 450px;
 
   @media (max-width: 768px) {
-    padding: 20px;
-    gap: 16px;
+    padding: 16px;
+    gap: 10px;
+    margin: 10px 0;
   }
 `
 
