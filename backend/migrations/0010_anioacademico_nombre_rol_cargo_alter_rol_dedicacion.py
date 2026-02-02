@@ -10,11 +10,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='anioacademico',
-            name='nombre',
-            field=models.CharField(blank=True, max_length=255, null=True),
-        ),
+        # El campo 'nombre' ya fue agregado en la migración 0008
         migrations.AddField(
             model_name='rol',
             name='cargo',
