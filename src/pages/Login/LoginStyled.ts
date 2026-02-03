@@ -74,12 +74,12 @@ export const Container = styled.div`
 export const Card = styled.div`
   position: relative;
   width: 100%;
-  max-width: 520px;
-  padding: 60px 48px 48px;
+  max-width: 480px;
+  padding: 32px 36px 28px;
   background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-radius: 28px;
+  border-radius: 24px;
   box-shadow:
     0 25px 80px rgba(0, 0, 0, 0.2),
     0 10px 30px rgba(0, 0, 0, 0.1);
@@ -93,9 +93,9 @@ export const Card = styled.div`
   margin: 0 auto;
 
   @media (max-width: 768px) {
-    padding: 28px 24px 24px;
-    max-width: 95%;
-    border-radius: 20px;
+    padding: 20px 20px 16px;
+    max-width: 92%;
+    border-radius: 16px;
   }
 `
 
@@ -103,21 +103,21 @@ export const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 24px;
-  margin-bottom: 16px;
+  gap: 16px;
+  margin-bottom: 12px;
 
   @media (max-width: 768px) {
-    gap: 20px;
-    margin-bottom: 12px;
+    gap: 12px;
+    margin-bottom: 8px;
   }
 `
 
 export const LogoUNT = styled.img`
-  height: 70px;
+  height: 55px;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
   transition: transform 0.3s ease;
   background: white;
-  padding: 8px;
+  padding: 6px;
   border-radius: 8px;
 
   &:hover {
@@ -125,16 +125,17 @@ export const LogoUNT = styled.img`
   }
 
   @media (max-width: 768px) {
-    height: 55px;
+    height: 45px;
+    padding: 4px;
   }
 `
 
 export const LogoFACET = styled.img`
-  height: 70px;
+  height: 55px;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
   transition: transform 0.3s ease;
   background: white;
-  padding: 8px;
+  padding: 6px;
   border-radius: 8px;
 
   &:hover {
@@ -142,14 +143,15 @@ export const LogoFACET = styled.img`
   }
 
   @media (max-width: 768px) {
-    height: 55px;
+    height: 45px;
+    padding: 4px;
   }
 `
 
 export const InstitucionalBadge = styled.div`
   display: inline-flex;
   align-items: center;
-  padding: 8px 20px;
+  padding: 6px 16px;
   background: linear-gradient(
     135deg,
     rgba(45, 102, 157, 0.1) 0%,
@@ -157,72 +159,50 @@ export const InstitucionalBadge = styled.div`
   );
   border: 1px solid rgba(45, 102, 157, 0.2);
   border-radius: 50px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--primary-color);
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  margin-bottom: 16px;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.4),
-      transparent
-    );
-    transition: left 0.5s ease;
-  }
-
-  &:hover::before {
-    left: 100%;
-  }
+  margin-bottom: 12px;
 
   @media (max-width: 768px) {
-    font-size: 12px;
-    padding: 6px 16px;
-    margin-bottom: 8px;
+    font-size: 10px;
+    padding: 4px 12px;
+    margin-bottom: 6px;
   }
 `
 
 export const SistemaNombre = styled.h1`
-  font-size: 48px;
+  font-size: 36px;
   font-weight: 800;
   color: var(--primary-color);
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0;
   text-align: center;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   line-height: 1.1;
   text-shadow: 0 2px 10px rgba(45, 102, 157, 0.15);
 
   @media (max-width: 768px) {
-    font-size: 36px;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
+    font-size: 28px;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
   }
 `
 
 export const SistemaDescripcion = styled.h2`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #475569;
-  margin: 0 0 20px 0;
+  margin: 0 0 12px 0;
   text-align: center;
   letter-spacing: 0.3px;
-  line-height: 1.4;
+  line-height: 1.3;
 
   @media (max-width: 768px) {
-    font-size: 14px;
-    margin-bottom: 8px;
+    font-size: 13px;
+    margin-bottom: 6px;
   }
 `
 
@@ -242,16 +222,16 @@ export const LoginSubtitle = styled.p`
 export const Text = styled.p`
   width: 100%;
   color: #64748b;
-  font-size: 15px;
+  font-size: 13px;
   text-align: center;
-  padding: 20px 0;
-  line-height: 1.7;
+  padding: 8px 0;
+  line-height: 1.4;
   margin: 0;
 
   @media (max-width: 768px) {
-    font-size: 13px;
-    padding: 8px 0;
-    line-height: 1.4;
+    font-size: 12px;
+    padding: 6px 0;
+    line-height: 1.3;
   }
 `
 
@@ -261,7 +241,7 @@ export const LoginButton = styled.button<{ $isDev?: boolean }>`
     props.$isDev
       ? 'linear-gradient(135deg, #ff9800 0%, #f57c00 100%)'
       : 'linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)'};
-  padding: 16px 28px;
+  padding: 12px 24px;
   text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border: 2px solid ${(props) => (props.$isDev ? '#ff9800' : '#e0e0e0')};
@@ -271,16 +251,16 @@ export const LoginButton = styled.button<{ $isDev?: boolean }>`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
-  font-size: 15px;
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 600;
-  gap: 12px;
-  min-width: 300px;
+  gap: 10px;
+  min-width: 280px;
   width: 100%;
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     border-color: ${(props) =>
       props.$isDev ? '#e65100' : 'var(--primary-color)'};
   }
@@ -290,8 +270,8 @@ export const LoginButton = styled.button<{ $isDev?: boolean }>`
   }
 
   img {
-    height: 22px;
-    width: 22px;
+    height: 18px;
+    width: 18px;
   }
 
   p {
@@ -300,9 +280,15 @@ export const LoginButton = styled.button<{ $isDev?: boolean }>`
   }
 
   @media (max-width: 768px) {
-    min-width: 250px;
-    padding: 12px 20px;
-    font-size: 14px;
+    min-width: 240px;
+    padding: 10px 18px;
+    font-size: 13px;
+    gap: 8px;
+
+    img {
+      height: 16px;
+      width: 16px;
+    }
   }
 `
 
@@ -392,8 +378,8 @@ export const BackButton = styled.button`
 `
 
 export const ProfileImage = styled.div`
-  height: 100px;
-  width: 100px;
+  height: 70px;
+  width: 70px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -403,8 +389,8 @@ export const ProfileImage = styled.div`
     var(--primary-color) 0%,
     var(--secondary-color) 100%
   );
-  box-shadow: 0 15px 40px rgba(45, 102, 157, 0.3);
-  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(45, 102, 157, 0.3);
+  margin-bottom: 12px;
   transition: transform 0.3s ease;
   animation: ${pulse} 4s ease-in-out infinite;
 
@@ -413,17 +399,17 @@ export const ProfileImage = styled.div`
   }
 
   i {
-    font-size: 50px;
+    font-size: 35px;
     color: white;
   }
 
   @media (max-width: 768px) {
-    height: 80px;
-    width: 80px;
-    margin-bottom: 12px;
+    height: 60px;
+    width: 60px;
+    margin-bottom: 8px;
 
     i {
-      font-size: 40px;
+      font-size: 30px;
     }
   }
 `
@@ -432,22 +418,22 @@ export const AccionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 24px;
+  gap: 8px;
+  padding: 12px;
   background: linear-gradient(
     135deg,
     rgba(45, 102, 157, 0.05) 0%,
     rgba(26, 77, 109, 0.05) 100%
   );
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid rgba(45, 102, 157, 0.1);
-  margin: 16px 0 24px;
+  margin: 8px 0 12px;
   width: 100%;
 
   @media (max-width: 768px) {
-    padding: 12px;
-    gap: 8px;
-    margin: 8px 0 12px;
+    padding: 10px;
+    gap: 6px;
+    margin: 6px 0 8px;
   }
 `
 

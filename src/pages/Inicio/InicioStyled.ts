@@ -318,15 +318,21 @@ export const IconoFuncionalidad = styled.div`
 `
 
 export const DescripcionFuncionalidad = styled.div`
-  padding: 12px 8px;
-  font-size: 15px;
+  padding: 8px 4px;
+  font-size: 14px;
   letter-spacing: 0.2px;
-  line-height: 1.7;
+  line-height: 1.5;
   text-align: center;
   color: #64748b;
 
   b {
     color: var(--primary-color);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+    line-height: 1.4;
+    padding: 6px 4px;
   }
 `
 
@@ -368,15 +374,15 @@ export const TextoBienvenidaContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    margin: 0 20px;
-    padding: 32px 24px;
-    border-radius: 20px;
+    margin: 0 16px;
+    padding: 24px 20px;
+    border-radius: 16px;
   }
 `
 
 export const LogoFacet = styled.img`
-  height: 110px;
-  margin-bottom: 16px;
+  height: 80px;
+  margin-bottom: 12px;
   filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.15));
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   animation: ${pulse} 4s ease-in-out infinite;
@@ -387,8 +393,8 @@ export const LogoFacet = styled.img`
   }
 
   @media (max-width: 768px) {
-    height: 90px;
-    margin-bottom: 12px;
+    height: 70px;
+    margin-bottom: 8px;
   }
 `
 
@@ -433,42 +439,43 @@ export const InstitucionalBadge = styled.div`
   }
 
   @media (max-width: 768px) {
-    font-size: 12px;
-    padding: 6px 16px;
-    margin-bottom: 10px;
+    font-size: 11px;
+    padding: 5px 14px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
   }
 `
 
 export const SistemaNombre = styled.h1`
-  font-size: 52px;
+  font-size: 40px;
   font-weight: 800;
   color: var(--primary-color);
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0;
   text-align: center;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   line-height: 1.1;
   text-shadow: 0 2px 10px rgba(45, 102, 157, 0.15);
 
   @media (max-width: 768px) {
-    font-size: 40px;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
+    font-size: 32px;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
   }
 `
 
 export const SistemaDescripcion = styled.h2`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #475569;
-  margin: 0 0 20px 0;
+  margin: 0 0 12px 0;
   text-align: center;
   letter-spacing: 0.3px;
-  line-height: 1.4;
+  line-height: 1.3;
 
   @media (max-width: 768px) {
-    font-size: 16px;
-    margin-bottom: 10px;
+    font-size: 14px;
+    margin-bottom: 6px;
   }
 `
 
@@ -476,36 +483,37 @@ export const AccionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 24px;
+  gap: 12px;
+  padding: 16px;
   background: linear-gradient(
     135deg,
     rgba(45, 102, 157, 0.05) 0%,
     rgba(26, 77, 109, 0.05) 100%
   );
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid rgba(45, 102, 157, 0.1);
-  margin: 16px 0;
+  margin: 10px 0;
   width: 100%;
   max-width: 450px;
 
   @media (max-width: 768px) {
-    padding: 16px;
-    gap: 10px;
-    margin: 10px 0;
+    padding: 12px;
+    gap: 8px;
+    margin: 6px 0;
   }
 `
 
 export const AccionTexto = styled.p`
-  font-size: 15px;
+  font-size: 14px;
   color: #64748b;
   text-align: center;
-  line-height: 1.6;
+  line-height: 1.4;
   margin: 0;
   font-weight: 400;
 
   @media (max-width: 768px) {
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 1.3;
   }
 `
 
@@ -528,10 +536,10 @@ export const LoginButton = styled.button`
   background: linear-gradient(135deg, var(--primary-color) 0%, #1a4d6d 100%);
   color: white;
   border: none;
-  padding: 16px 48px;
-  font-size: 16px;
+  padding: 12px 36px;
+  font-size: 15px;
   font-weight: 600;
-  border-radius: 12px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow:
@@ -576,8 +584,9 @@ export const LoginButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    padding: 14px 40px;
-    font-size: 15px;
+    padding: 10px 32px;
+    font-size: 14px;
+    border-radius: 8px;
   }
 `
 
