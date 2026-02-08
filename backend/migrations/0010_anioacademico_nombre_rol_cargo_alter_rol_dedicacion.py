@@ -10,6 +10,31 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        # Los campos ya fueron agregados en la migración 0008
-        # Esta migración se mantiene vacía para marcarla como aplicada
+        # Los campos ya fueron agregados en la migración 0008 via SQL
+        # Esta migración sincroniza el estado de Django sin tocar la BD
+        migrations.SeparateDatabaseAndState(
+            state_operations=[
+                migrations.AddField(
+                    model_name='anioacademico',
+                    name='nombre',
+                    field=models.CharField(blank=True, max_length=255, null=True),
+                ),
+                migrations.AddField(
+                    model_name='rol',
+                    name='cargo',
+                    field=models.CharField(blank=True, max_length=255, null=True),
+                ),
+                migrations.AlterField(
+                    model_name='rol',
+                    name='dedicacion',
+                    field=models.CharField(blank=True, choices=[('N', 'No exclusiva'), ('E', 'Exclusiva')], max_length=2, null=True),
+                ),
+                migrations.AlterField(
+                    model_name='estandar',
+                    name='descriptores',
+                    field=models.ManyToManyField(blank=True, to='backend.descriptor'),
+                ),
+            ],
+            database_operations=[],
+        ),
     ]
